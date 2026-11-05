@@ -1,0 +1,337 @@
+{
+  "environment": {
+    "requested_tokens": 2200,
+    "actual_tokens": 2190,
+    "slot": 0,
+    "gpu_index": 0,
+    "server_pid": null,
+    "contender_mib": 512
+  },
+  "trials": {
+    "keep": {
+      "mode": "keep",
+      "first": {
+        "ok": true,
+        "seconds": 0.9898,
+        "cache_n": 0,
+        "prompt_n": 2190,
+        "prompt_ms": 405.958,
+        "raw_tokens_cached": 2253,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2190,
+          "prompt_ms": 405.958,
+          "prompt_per_token_ms": 0.18536894977168952,
+          "prompt_per_second": 5394.646736854551,
+          "predicted_n": 64,
+          "predicted_ms": 579.925,
+          "predicted_per_token_ms": 9.205158730158729,
+          "predicted_per_second": 108.63473725050653
+        }
+      },
+      "second": {
+        "ok": true,
+        "seconds": 0.6043,
+        "cache_n": 2189,
+        "prompt_n": 10,
+        "prompt_ms": 21.841,
+        "raw_tokens_cached": 2262,
+        "timings": {
+          "cache_n": 2189,
+          "prompt_n": 10,
+          "prompt_ms": 21.841,
+          "prompt_per_token_ms": 2.1841,
+          "prompt_per_second": 457.85449384185705,
+          "predicted_n": 64,
+          "predicted_ms": 578.825,
+          "predicted_per_token_ms": 9.187698412698413,
+          "predicted_per_second": 108.84118688722843
+        }
+      },
+      "erase": null,
+      "snapshots": [
+        {
+          "label": "keep:initial",
+          "timestamp": 1793838564.8264792,
+          "gpu": {
+            "used_mib": 3277.0,
+            "free_mib": 4534.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "keep:after A1",
+          "timestamp": 1793838565.9320295,
+          "gpu": {
+            "used_mib": 3271.0,
+            "free_mib": 4540.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "keep:after wait",
+          "timestamp": 1793838568.6345513,
+          "gpu": {
+            "used_mib": 3263.0,
+            "free_mib": 4548.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "keep:after A2",
+          "timestamp": 1793838569.329628,
+          "gpu": {
+            "used_mib": 3255.0,
+            "free_mib": 4556.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        }
+      ]
+    },
+    "erase": {
+      "mode": "erase",
+      "first": {
+        "ok": true,
+        "seconds": 0.9576,
+        "cache_n": 0,
+        "prompt_n": 2190,
+        "prompt_ms": 393.861,
+        "raw_tokens_cached": 2253,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2190,
+          "prompt_ms": 393.861,
+          "prompt_per_token_ms": 0.17984520547945204,
+          "prompt_per_second": 5560.337276348762,
+          "predicted_n": 64,
+          "predicted_ms": 559.864,
+          "predicted_per_token_ms": 8.88673015873016,
+          "predicted_per_second": 112.52732806538731
+        }
+      },
+      "second": {
+        "ok": true,
+        "seconds": 0.9815,
+        "cache_n": 0,
+        "prompt_n": 2199,
+        "prompt_ms": 417.13,
+        "raw_tokens_cached": 2262,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2199,
+          "prompt_ms": 417.13,
+          "prompt_per_token_ms": 0.18969076853115052,
+          "prompt_per_second": 5271.7378275357805,
+          "predicted_n": 64,
+          "predicted_ms": 560.928,
+          "predicted_per_token_ms": 8.903619047619047,
+          "predicted_per_second": 112.31387985623823
+        }
+      },
+      "erase": {
+        "id_slot": 0,
+        "n_erased": 2253
+      },
+      "snapshots": [
+        {
+          "label": "erase:initial",
+          "timestamp": 1793838569.4332564,
+          "gpu": {
+            "used_mib": 3254.0,
+            "free_mib": 4557.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "erase:after A1",
+          "timestamp": 1793838570.4943395,
+          "gpu": {
+            "used_mib": 3254.0,
+            "free_mib": 4557.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "erase:after wait",
+          "timestamp": 1793838573.1919444,
+          "gpu": {
+            "used_mib": 3242.0,
+            "free_mib": 4569.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "erase:after A2",
+          "timestamp": 1793838574.2687593,
+          "gpu": {
+            "used_mib": 3235.0,
+            "free_mib": 4576.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        }
+      ]
+    },
+    "contender": {
+      "first": {
+        "ok": true,
+        "seconds": 0.9683,
+        "cache_n": 0,
+        "prompt_n": 2190,
+        "prompt_ms": 395.425,
+        "raw_tokens_cached": 2253,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2190,
+          "prompt_ms": 395.425,
+          "prompt_per_token_ms": 0.18055936073059362,
+          "prompt_per_second": 5538.344818865778,
+          "predicted_n": 64,
+          "predicted_ms": 569.72,
+          "predicted_per_token_ms": 9.043174603174604,
+          "predicted_per_second": 110.58063610194482
+        }
+      },
+      "second": {
+        "ok": true,
+        "seconds": 0.5877,
+        "cache_n": 2189,
+        "prompt_n": 10,
+        "prompt_ms": 21.307,
+        "raw_tokens_cached": 2262,
+        "timings": {
+          "cache_n": 2189,
+          "prompt_n": 10,
+          "prompt_ms": 21.307,
+          "prompt_per_token_ms": 2.1307,
+          "prompt_per_second": 469.3293283897311,
+          "predicted_n": 64,
+          "predicted_ms": 563.086,
+          "predicted_per_token_ms": 8.937873015873016,
+          "predicted_per_second": 111.8834423160938
+        }
+      },
+      "snapshots": [
+        {
+          "label": "contender:before",
+          "timestamp": 1793838575.3399496,
+          "gpu": {
+            "used_mib": 3228.0,
+            "free_mib": 4583.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "contender:allocated",
+          "timestamp": 1793838575.8600345,
+          "gpu": {
+            "used_mib": 3836.0,
+            "free_mib": 3975.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "contender:after A2",
+          "timestamp": 1793838576.5446298,
+          "gpu": {
+            "used_mib": 3839.0,
+            "free_mib": 3972.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "contender:freed",
+          "timestamp": 1793838581.5499356,
+          "gpu": {
+            "used_mib": 3228.0,
+            "free_mib": 4583.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        }
+      ],
+      "contender_messages": [
+        {
+          "event": "allocated",
+          "allocated_mib": 512
+        },
+        {
+          "event": "freed",
+          "allocated_mib": 512
+        }
+      ],
+      "contender_exit_code": 0,
+      "contender_stderr": ""
+    }
+  }
+}

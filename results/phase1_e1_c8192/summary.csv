@@ -1,0 +1,7 @@
+exp,name,ok,request_s,cache_n,prompt_n,prompt_ms,predicted_n,cached_field,evaluated_field,error
+E1,wait=0.0:cache=True,True,0.656,1186,59,29.787,64,1308,1245,
+E1,wait=0.0:cache=False,True,0.814,0,1245,238.964,64,1308,1245,
+E1,wait=3.0:cache=True,True,0.587,1186,59,26.031,64,1308,1245,
+E1,wait=3.0:cache=False,True,0.772,0,1245,231.215,64,1308,1245,
+E1,wait=8.0:cache=True,True,0.715,1186,59,169.285,64,1308,1245,
+E1,wait=8.0:cache=False,True,0.794,0,1245,245.871,64,1308,1245,

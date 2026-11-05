@@ -1,0 +1,308 @@
+{
+  "date_utc": "2026-11-04T10:34:47.788343+00:00",
+  "description": "Phase 1 exploratory characterization; no scheduler added",
+  "params": {
+    "url": "http://127.0.0.1:8080",
+    "expect_ctx": 4096,
+    "experiment": "e3",
+    "a_tokens": 1200,
+    "b_short_tokens": 1200,
+    "b_long_tokens": 2600,
+    "n_predict": 128,
+    "waits": [
+      0,
+      3,
+      8
+    ],
+    "gap": 3,
+    "timeout": 180,
+    "interval": 0.3,
+    "out_dir": "results/phase1_e3_c4096"
+  },
+  "measured_prompt_tokens": {
+    "A": 1187,
+    "B_short": 1218,
+    "B_long": 2612
+  },
+  "verified_local_server": {
+    "server_context_capacity_arg": 4096,
+    "process_command": "405415 ./build/bin/llama-server -hf Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M -ngl 99 -c 4096 -np 2 --kv-unified --kv-unified-per-slot 4096 --cache-ram 0 --slot-save-path /tmp/llama-e1-slots --metrics -cb --host 127.0.0.1 --port 8080]"
+  },
+  "slot_context_limits": [
+    4096,
+    4096
+  ],
+  "records": [
+    {
+      "experiment": "E3",
+      "pair": "short_short",
+      "concurrent": {
+        "wall_s": 2.5,
+        "requests": [
+          {
+            "ok": true,
+            "request_s": 1.581,
+            "cache_n": 0,
+            "prompt_n": 1187,
+            "prompt_ms": 497.057,
+            "predicted_n": 84,
+            "cached_field": 1270,
+            "evaluated_field": 1187,
+            "error": null
+          },
+          {
+            "ok": true,
+            "request_s": 1.997,
+            "cache_n": 0,
+            "prompt_n": 1218,
+            "prompt_ms": 415.471,
+            "predicted_n": 128,
+            "cached_field": 1345,
+            "evaluated_field": 1218,
+            "error": null
+          }
+        ],
+        "observations": {
+          "samples": 7,
+          "busy_slots_peak": 2,
+          "gpu_used_mib_first": 3575.0,
+          "gpu_used_mib_peak": 3587.0,
+          "gpu_delta_peak_minus_first_mib": 12.0,
+          "candidate_kv_or_cache_metrics": {
+            "llamacpp:prompt_tokens_cached_total": {
+              "min": 0.0,
+              "max": 0.0
+            }
+          },
+          "slot_fields": [
+            "id",
+            "is_processing",
+            "n_ctx",
+            "speculative"
+          ],
+          "slot_context_sizes": [
+            4096,
+            4096
+          ],
+          "slots_error": null,
+          "metrics_error": null
+        }
+      },
+      "serial": {
+        "wall_s": 2.751,
+        "requests": [
+          {
+            "ok": true,
+            "request_s": 1.363,
+            "cache_n": 0,
+            "prompt_n": 1187,
+            "prompt_ms": 223.002,
+            "predicted_n": 128,
+            "cached_field": 1314,
+            "evaluated_field": 1187,
+            "error": null
+          },
+          {
+            "ok": true,
+            "request_s": 1.389,
+            "cache_n": 0,
+            "prompt_n": 1218,
+            "prompt_ms": 227.744,
+            "predicted_n": 128,
+            "cached_field": 1345,
+            "evaluated_field": 1218,
+            "error": null
+          }
+        ]
+      },
+      "note": "Manual execution-order control, NOT a memory-aware scheduler. Concurrent baseline disables cache_prompt; we erase slot caches before each arm."
+    },
+    {
+      "experiment": "E3",
+      "pair": "long_long",
+      "concurrent": {
+        "wall_s": 1.295,
+        "requests": [
+          {
+            "ok": false,
+            "request_s": 0.793,
+            "cache_n": null,
+            "prompt_n": null,
+            "prompt_ms": null,
+            "predicted_n": null,
+            "cached_field": null,
+            "evaluated_field": null,
+            "error": "HTTP 500 /completion: {\"error\":{\"code\":500,\"message\":\"Context size has been exceeded.\",\"type\":\"server_error\"}}"
+          },
+          {
+            "ok": false,
+            "request_s": 0.793,
+            "cache_n": null,
+            "prompt_n": null,
+            "prompt_ms": null,
+            "predicted_n": null,
+            "cached_field": null,
+            "evaluated_field": null,
+            "error": "HTTP 500 /completion: {\"error\":{\"code\":500,\"message\":\"Context size has been exceeded.\",\"type\":\"server_error\"}}"
+          }
+        ],
+        "observations": {
+          "samples": 4,
+          "busy_slots_peak": 2,
+          "gpu_used_mib_first": 3590.0,
+          "gpu_used_mib_peak": 3590.0,
+          "gpu_delta_peak_minus_first_mib": 0.0,
+          "candidate_kv_or_cache_metrics": {
+            "llamacpp:prompt_tokens_cached_total": {
+              "min": 0.0,
+              "max": 0.0
+            }
+          },
+          "slot_fields": [
+            "id",
+            "id_task",
+            "is_processing",
+            "n_ctx",
+            "n_prompt_tokens",
+            "n_prompt_tokens_cache",
+            "n_prompt_tokens_processed",
+            "next_token",
+            "params",
+            "speculative"
+          ],
+          "slot_context_sizes": [
+            4096,
+            4096
+          ],
+          "slots_error": null,
+          "metrics_error": null
+        }
+      },
+      "serial": {
+        "wall_s": 2.97,
+        "requests": [
+          {
+            "ok": true,
+            "request_s": 1.272,
+            "cache_n": 0,
+            "prompt_n": 2612,
+            "prompt_ms": 483.213,
+            "predicted_n": 84,
+            "cached_field": 2695,
+            "evaluated_field": 2612,
+            "error": null
+          },
+          {
+            "ok": true,
+            "request_s": 1.698,
+            "cache_n": 0,
+            "prompt_n": 2612,
+            "prompt_ms": 503.161,
+            "predicted_n": 128,
+            "cached_field": 2739,
+            "evaluated_field": 2612,
+            "error": null
+          }
+        ]
+      },
+      "note": "Manual execution-order control, NOT a memory-aware scheduler. Concurrent baseline disables cache_prompt; we erase slot caches before each arm."
+    },
+    {
+      "experiment": "E3",
+      "pair": "short_long",
+      "concurrent": {
+        "wall_s": 2.847,
+        "requests": [
+          {
+            "ok": true,
+            "request_s": 2.318,
+            "cache_n": 0,
+            "prompt_n": 1187,
+            "prompt_ms": 223.681,
+            "predicted_n": 128,
+            "cached_field": 1314,
+            "evaluated_field": 1187,
+            "error": null
+          },
+          {
+            "ok": true,
+            "request_s": 2.345,
+            "cache_n": 0,
+            "prompt_n": 2612,
+            "prompt_ms": 545.792,
+            "predicted_n": 128,
+            "cached_field": 2739,
+            "evaluated_field": 2612,
+            "error": null
+          }
+        ],
+        "observations": {
+          "samples": 8,
+          "busy_slots_peak": 2,
+          "gpu_used_mib_first": 3555.0,
+          "gpu_used_mib_peak": 3555.0,
+          "gpu_delta_peak_minus_first_mib": 0.0,
+          "candidate_kv_or_cache_metrics": {
+            "llamacpp:prompt_tokens_cached_total": {
+              "min": 0.0,
+              "max": 0.0
+            }
+          },
+          "slot_fields": [
+            "id",
+            "id_task",
+            "is_processing",
+            "n_ctx",
+            "n_prompt_tokens",
+            "n_prompt_tokens_cache",
+            "n_prompt_tokens_processed",
+            "next_token",
+            "params",
+            "speculative"
+          ],
+          "slot_context_sizes": [
+            4096,
+            4096
+          ],
+          "slots_error": null,
+          "metrics_error": null
+        }
+      },
+      "serial": {
+        "wall_s": 2.646,
+        "requests": [
+          {
+            "ok": true,
+            "request_s": 1.359,
+            "cache_n": 0,
+            "prompt_n": 1187,
+            "prompt_ms": 222.516,
+            "predicted_n": 128,
+            "cached_field": 1314,
+            "evaluated_field": 1187,
+            "error": null
+          },
+          {
+            "ok": true,
+            "request_s": 1.287,
+            "cache_n": 0,
+            "prompt_n": 2612,
+            "prompt_ms": 494.696,
+            "predicted_n": 84,
+            "cached_field": 2695,
+            "evaluated_field": 2612,
+            "error": null
+          }
+        ]
+      },
+      "note": "Manual execution-order control, NOT a memory-aware scheduler. Concurrent baseline disables cache_prompt; we erase slot caches before each arm."
+    }
+  ],
+  "limitations": [
+    "nvidia-smi allocations do not measure live KV cells",
+    "cache_n/prompt_n are response metrics, not direct GPU KV occupancy",
+    "fixed sleep simulates tool waiting; it is not a real external tool",
+    "cache behavior may depend on llama.cpp version and KV budget",
+    "results depend on server startup flags; record pgrep -af llama-server"
+  ]
+}

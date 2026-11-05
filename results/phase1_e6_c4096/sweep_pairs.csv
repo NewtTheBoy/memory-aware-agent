@@ -1,0 +1,9 @@
+budget,a_profile,mix,wait_s,paired_total,paired_both_success,sum_completed_preserve,sum_completed_reuse,median_preserve_minus_reuse_makespan_s,faster_when_both_succeed,comparison_note
+4096,A_1200,long_long,0.0,2,0,6,2,,unknown_or_tie,Times comparable only for trials where both policies succeeded.
+4096,A_1200,long_long,3.0,2,0,6,2,,unknown_or_tie,Times comparable only for trials where both policies succeeded.
+4096,A_1200,short_long,0.0,2,2,6,6,0.168598,reuse,Times comparable only for trials where both policies succeeded.
+4096,A_1200,short_long,3.0,2,2,6,6,-0.133823,preserve,Times comparable only for trials where both policies succeeded.
+4096,A_2200,long_long,0.0,2,0,2,2,,unknown_or_tie,Times comparable only for trials where both policies succeeded.
+4096,A_2200,long_long,3.0,2,0,2,2,,unknown_or_tie,Times comparable only for trials where both policies succeeded.
+4096,A_2200,short_long,0.0,2,2,6,6,-0.013552,preserve,Times comparable only for trials where both policies succeeded.
+4096,A_2200,short_long,3.0,2,0,2,6,,unknown_or_tie,Times comparable only for trials where both policies succeeded.

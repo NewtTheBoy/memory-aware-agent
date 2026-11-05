@@ -1,0 +1,212 @@
+{
+  "date_utc": "2026-11-04T10:25:20.435959+00:00",
+  "description": "Phase 1 exploratory characterization; no scheduler added",
+  "params": {
+    "url": "http://127.0.0.1:8080",
+    "expect_ctx": 8192,
+    "experiment": "e1",
+    "a_tokens": 1200,
+    "b_short_tokens": 1200,
+    "b_long_tokens": 2600,
+    "n_predict": 64,
+    "waits": [
+      0.0,
+      3.0,
+      8.0
+    ],
+    "gap": 3,
+    "timeout": 180,
+    "interval": 0.3,
+    "out_dir": "results/phase1_e1_c8192"
+  },
+  "measured_prompt_tokens": {
+    "A": 1187,
+    "B_short": 1218,
+    "B_long": 2612
+  },
+  "verified_local_server": {
+    "server_context_capacity_arg": 8192,
+    "process_command": "403096 ./build/bin/llama-server -hf Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M -ngl 99 -c 8192 -np 2 --kv-unified --kv-unified-per-slot 4096 --cache-ram 0 --slot-save-path /tmp/llama-e1-slots --metrics -cb --host 127.0.0.1 --port 8080"
+  },
+  "slot_context_limits": [
+    4096,
+    4096
+  ],
+  "records": [
+    {
+      "experiment": "E1",
+      "wait_s": 0.0,
+      "cache_enabled": true,
+      "first": {
+        "ok": true,
+        "request_s": 0.86,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 268.681,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "second": {
+        "ok": true,
+        "request_s": 0.656,
+        "cache_n": 1186,
+        "prompt_n": 59,
+        "prompt_ms": 29.787,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "notes": "Controlled time.sleep simulates an external tool wait; no real tool was invoked."
+    },
+    {
+      "experiment": "E1",
+      "wait_s": 0.0,
+      "cache_enabled": false,
+      "first": {
+        "ok": true,
+        "request_s": 0.815,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 239.49,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "second": {
+        "ok": true,
+        "request_s": 0.814,
+        "cache_n": 0,
+        "prompt_n": 1245,
+        "prompt_ms": 238.964,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "notes": "Controlled time.sleep simulates an external tool wait; no real tool was invoked."
+    },
+    {
+      "experiment": "E1",
+      "wait_s": 3.0,
+      "cache_enabled": true,
+      "first": {
+        "ok": true,
+        "request_s": 0.801,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 239.794,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "second": {
+        "ok": true,
+        "request_s": 0.587,
+        "cache_n": 1186,
+        "prompt_n": 59,
+        "prompt_ms": 26.031,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "notes": "Controlled time.sleep simulates an external tool wait; no real tool was invoked."
+    },
+    {
+      "experiment": "E1",
+      "wait_s": 3.0,
+      "cache_enabled": false,
+      "first": {
+        "ok": true,
+        "request_s": 0.828,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 238.281,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "second": {
+        "ok": true,
+        "request_s": 0.772,
+        "cache_n": 0,
+        "prompt_n": 1245,
+        "prompt_ms": 231.215,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "notes": "Controlled time.sleep simulates an external tool wait; no real tool was invoked."
+    },
+    {
+      "experiment": "E1",
+      "wait_s": 8.0,
+      "cache_enabled": true,
+      "first": {
+        "ok": true,
+        "request_s": 0.809,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 248.572,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "second": {
+        "ok": true,
+        "request_s": 0.715,
+        "cache_n": 1186,
+        "prompt_n": 59,
+        "prompt_ms": 169.285,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "notes": "Controlled time.sleep simulates an external tool wait; no real tool was invoked."
+    },
+    {
+      "experiment": "E1",
+      "wait_s": 8.0,
+      "cache_enabled": false,
+      "first": {
+        "ok": true,
+        "request_s": 0.79,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 221.453,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "second": {
+        "ok": true,
+        "request_s": 0.794,
+        "cache_n": 0,
+        "prompt_n": 1245,
+        "prompt_ms": 245.871,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "notes": "Controlled time.sleep simulates an external tool wait; no real tool was invoked."
+    }
+  ],
+  "limitations": [
+    "nvidia-smi allocations do not measure live KV cells",
+    "cache_n/prompt_n are response metrics, not direct GPU KV occupancy",
+    "fixed sleep simulates tool waiting; it is not a real external tool",
+    "cache behavior may depend on llama.cpp version and KV budget",
+    "results depend on server startup flags; record pgrep -af llama-server"
+  ]
+}

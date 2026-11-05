@@ -1,0 +1,7 @@
+budget,mode,repeat,all_ok,completed_tasks,attempted_tasks,attempted_steps,completed_steps,capacity_error_requests,makespan_s,gpu_used_mib_first,gpu_used_mib_peak,gpu_sample_count
+8192,fixed,0,True,2,2,6,6,0,4.365153,3577.0,3597.0,8
+8192,growing,0,True,2,2,6,6,0,4.245269,3588.0,3588.0,8
+8192,growing,1,True,2,2,6,6,0,4.193063,3545.0,3545.0,8
+8192,fixed,1,True,2,2,6,6,0,4.146957,3545.0,3545.0,8
+8192,fixed,2,True,2,2,6,6,0,4.098493,3545.0,3545.0,8
+8192,growing,2,True,2,2,6,6,0,4.174882,3545.0,3545.0,8

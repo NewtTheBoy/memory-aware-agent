@@ -1,0 +1,1093 @@
+{
+  "created_utc": "2026-11-05T00:56:03.575600+00:00",
+  "settings": {
+    "project_root": "/home/newttheboy/projects/memory-aware-agent",
+    "server_binary": "llama.cpp/build/bin/llama-server",
+    "model_repo": "Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M",
+    "budgets": [
+      4096,
+      8192,
+      16384
+    ],
+    "per_slot": 4096,
+    "ngl": 99,
+    "port": 8080,
+    "gpu": 0,
+    "tokens": 2200,
+    "predict": 64,
+    "wait": 2.0,
+    "repeats": 3,
+    "samples": 5,
+    "sample_gap": 0.18,
+    "startup_timeout": 180,
+    "request_timeout": 180,
+    "settle_after_stop": 1.5,
+    "out_dir": "results/phase1_e8_physical_vram"
+  },
+  "servers": [
+    {
+      "budget": 4096,
+      "kv_gpu_mib_log": null,
+      "n_slots": 2,
+      "per_slot": 4096,
+      "pre_server_used_mib": 937.0,
+      "server_idle_used_mib": 3124.0,
+      "startup_delta_mib": 2187.0,
+      "log_path": "results/phase1_e8_physical_vram/server_logs/llama_c4096.log",
+      "cmd": [
+        "/home/newttheboy/projects/memory-aware-agent/llama.cpp/build/bin/llama-server",
+        "-hf",
+        "Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M",
+        "-ngl",
+        "99",
+        "-c",
+        "4096",
+        "-np",
+        "2",
+        "--kv-unified",
+        "--kv-unified-per-slot",
+        "4096",
+        "--cache-ram",
+        "0",
+        "--slot-save-path",
+        "/home/newttheboy/projects/memory-aware-agent/results/phase1_e8_physical_vram/slots_c4096",
+        "--metrics",
+        "-cb",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8080"
+      ],
+      "kv_log_records": [],
+      "tokenized_prompt_count": 2191,
+      "post_server_used_mib": 918.0,
+      "shutdown_drop_mib": 2206.0
+    },
+    {
+      "budget": 8192,
+      "kv_gpu_mib_log": null,
+      "n_slots": 2,
+      "per_slot": 4096,
+      "pre_server_used_mib": 917.0,
+      "server_idle_used_mib": 3252.0,
+      "startup_delta_mib": 2335.0,
+      "log_path": "results/phase1_e8_physical_vram/server_logs/llama_c8192.log",
+      "cmd": [
+        "/home/newttheboy/projects/memory-aware-agent/llama.cpp/build/bin/llama-server",
+        "-hf",
+        "Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M",
+        "-ngl",
+        "99",
+        "-c",
+        "8192",
+        "-np",
+        "2",
+        "--kv-unified",
+        "--kv-unified-per-slot",
+        "4096",
+        "--cache-ram",
+        "0",
+        "--slot-save-path",
+        "/home/newttheboy/projects/memory-aware-agent/results/phase1_e8_physical_vram/slots_c8192",
+        "--metrics",
+        "-cb",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8080"
+      ],
+      "kv_log_records": [],
+      "tokenized_prompt_count": 2191,
+      "post_server_used_mib": 931.0,
+      "shutdown_drop_mib": 2321.0
+    },
+    {
+      "budget": 16384,
+      "kv_gpu_mib_log": null,
+      "n_slots": 2,
+      "per_slot": 4096,
+      "pre_server_used_mib": 930.0,
+      "server_idle_used_mib": 3565.0,
+      "startup_delta_mib": 2635.0,
+      "log_path": "results/phase1_e8_physical_vram/server_logs/llama_c16384.log",
+      "cmd": [
+        "/home/newttheboy/projects/memory-aware-agent/llama.cpp/build/bin/llama-server",
+        "-hf",
+        "Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M",
+        "-ngl",
+        "99",
+        "-c",
+        "16384",
+        "-np",
+        "2",
+        "--kv-unified",
+        "--kv-unified-per-slot",
+        "4096",
+        "--cache-ram",
+        "0",
+        "--slot-save-path",
+        "/home/newttheboy/projects/memory-aware-agent/results/phase1_e8_physical_vram/slots_c16384",
+        "--metrics",
+        "-cb",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8080"
+      ],
+      "kv_log_records": [],
+      "tokenized_prompt_count": 2191,
+      "post_server_used_mib": 906.0,
+      "shutdown_drop_mib": 2659.0
+    }
+  ],
+  "trials": [
+    {
+      "budget": 4096,
+      "mode": "keep",
+      "rep": 1,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 1.028,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 454.689,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.5911,
+        "cache_n": 2190,
+        "prompt_n": 10,
+        "prompt_ms": 24.59,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": null,
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3120.0,
+          "free_mib": 4691.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3124.0,
+          "free_mib": 4687.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3120.0,
+          "free_mib": 4691.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3114.0,
+          "free_mib": 4697.0,
+          "used_range_mib": 4.0
+        }
+      },
+      "gpu_used_delta_wait_mib": -4.0,
+      "gpu_used_delta_from_initial_mib": 0.0
+    },
+    {
+      "budget": 4096,
+      "mode": "erase",
+      "rep": 1,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9601,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 395.181,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.9592,
+        "cache_n": 0,
+        "prompt_n": 2200,
+        "prompt_ms": 395.806,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": {
+        "id_slot": 0,
+        "n_erased": 2254
+      },
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3114.0,
+          "free_mib": 4697.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3114.0,
+          "free_mib": 4697.0,
+          "used_range_mib": 1.0
+        },
+        "before_a2": {
+          "used_mib": 3113.0,
+          "free_mib": 4698.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3110.0,
+          "free_mib": 4701.0,
+          "used_range_mib": 1.0
+        }
+      },
+      "gpu_used_delta_wait_mib": -1.0,
+      "gpu_used_delta_from_initial_mib": -1.0
+    },
+    {
+      "budget": 4096,
+      "mode": "erase",
+      "rep": 2,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9545,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 398.905,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.9592,
+        "cache_n": 0,
+        "prompt_n": 2200,
+        "prompt_ms": 401.2,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": {
+        "id_slot": 0,
+        "n_erased": 2254
+      },
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3110.0,
+          "free_mib": 4701.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3106.0,
+          "free_mib": 4705.0,
+          "used_range_mib": 4.0
+        },
+        "before_a2": {
+          "used_mib": 3106.0,
+          "free_mib": 4705.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3106.0,
+          "free_mib": 4705.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 0.0,
+      "gpu_used_delta_from_initial_mib": -4.0
+    },
+    {
+      "budget": 4096,
+      "mode": "keep",
+      "rep": 2,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9511,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 394.568,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.7404,
+        "cache_n": 2190,
+        "prompt_n": 10,
+        "prompt_ms": 124.174,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": null,
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3106.0,
+          "free_mib": 4705.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3105.0,
+          "free_mib": 4706.0,
+          "used_range_mib": 1.0
+        },
+        "before_a2": {
+          "used_mib": 3092.0,
+          "free_mib": 4719.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3092.0,
+          "free_mib": 4719.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": -13.0,
+      "gpu_used_delta_from_initial_mib": -14.0
+    },
+    {
+      "budget": 4096,
+      "mode": "keep",
+      "rep": 3,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9499,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 394.619,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.5866,
+        "cache_n": 2190,
+        "prompt_n": 10,
+        "prompt_ms": 22.209,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": null,
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3092.0,
+          "free_mib": 4719.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3092.0,
+          "free_mib": 4719.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3092.0,
+          "free_mib": 4719.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3092.0,
+          "free_mib": 4719.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 0.0,
+      "gpu_used_delta_from_initial_mib": 0.0
+    },
+    {
+      "budget": 4096,
+      "mode": "erase",
+      "rep": 3,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.932,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 388.676,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.9588,
+        "cache_n": 0,
+        "prompt_n": 2200,
+        "prompt_ms": 401.558,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": {
+        "id_slot": 0,
+        "n_erased": 2254
+      },
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3092.0,
+          "free_mib": 4719.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3092.0,
+          "free_mib": 4719.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3091.0,
+          "free_mib": 4720.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3091.0,
+          "free_mib": 4720.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": -1.0,
+      "gpu_used_delta_from_initial_mib": -1.0
+    },
+    {
+      "budget": 8192,
+      "mode": "keep",
+      "rep": 1,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9927,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 407.905,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.5877,
+        "cache_n": 2190,
+        "prompt_n": 10,
+        "prompt_ms": 20.96,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": null,
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3253.0,
+          "free_mib": 4558.0,
+          "used_range_mib": 1.0
+        },
+        "after_a1": {
+          "used_mib": 3257.0,
+          "free_mib": 4554.0,
+          "used_range_mib": 1.0
+        },
+        "before_a2": {
+          "used_mib": 3281.0,
+          "free_mib": 4530.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3277.0,
+          "free_mib": 4534.0,
+          "used_range_mib": 4.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 24.0,
+      "gpu_used_delta_from_initial_mib": 28.0
+    },
+    {
+      "budget": 8192,
+      "mode": "erase",
+      "rep": 1,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9837,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 427.168,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.9841,
+        "cache_n": 0,
+        "prompt_n": 2200,
+        "prompt_ms": 428.31,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": {
+        "id_slot": 0,
+        "n_erased": 2254
+      },
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3272.0,
+          "free_mib": 4539.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3268.0,
+          "free_mib": 4543.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3264.0,
+          "free_mib": 4547.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3262.0,
+          "free_mib": 4549.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": -4.0,
+      "gpu_used_delta_from_initial_mib": -8.0
+    },
+    {
+      "budget": 8192,
+      "mode": "erase",
+      "rep": 2,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9648,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 397.54,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 1.1084,
+        "cache_n": 0,
+        "prompt_n": 2200,
+        "prompt_ms": 549.33,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": {
+        "id_slot": 0,
+        "n_erased": 2254
+      },
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3254.0,
+          "free_mib": 4557.0,
+          "used_range_mib": 8.0
+        },
+        "after_a1": {
+          "used_mib": 3254.0,
+          "free_mib": 4557.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3254.0,
+          "free_mib": 4557.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3254.0,
+          "free_mib": 4557.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 0.0,
+      "gpu_used_delta_from_initial_mib": 0.0
+    },
+    {
+      "budget": 8192,
+      "mode": "keep",
+      "rep": 2,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9345,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 388.674,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.8119,
+        "cache_n": 2190,
+        "prompt_n": 10,
+        "prompt_ms": 147.023,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": null,
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3254.0,
+          "free_mib": 4557.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3254.0,
+          "free_mib": 4557.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3254.0,
+          "free_mib": 4557.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3254.0,
+          "free_mib": 4557.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 0.0,
+      "gpu_used_delta_from_initial_mib": 0.0
+    },
+    {
+      "budget": 8192,
+      "mode": "keep",
+      "rep": 3,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 1.0067,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 405.406,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.5891,
+        "cache_n": 2190,
+        "prompt_n": 10,
+        "prompt_ms": 21.743,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": null,
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3254.0,
+          "free_mib": 4557.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3244.0,
+          "free_mib": 4567.0,
+          "used_range_mib": 30.0
+        },
+        "before_a2": {
+          "used_mib": 3266.0,
+          "free_mib": 4545.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3266.0,
+          "free_mib": 4545.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 22.0,
+      "gpu_used_delta_from_initial_mib": 12.0
+    },
+    {
+      "budget": 8192,
+      "mode": "erase",
+      "rep": 3,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9612,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 392.905,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 1.1205,
+        "cache_n": 0,
+        "prompt_n": 2200,
+        "prompt_ms": 562.547,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": {
+        "id_slot": 0,
+        "n_erased": 2254
+      },
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3266.0,
+          "free_mib": 4545.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3266.0,
+          "free_mib": 4545.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3266.0,
+          "free_mib": 4545.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3266.0,
+          "free_mib": 4545.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 0.0,
+      "gpu_used_delta_from_initial_mib": 0.0
+    },
+    {
+      "budget": 16384,
+      "mode": "keep",
+      "rep": 1,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9752,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 401.838,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.5903,
+        "cache_n": 2190,
+        "prompt_n": 10,
+        "prompt_ms": 22.478,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": null,
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3560.0,
+          "free_mib": 4251.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3568.0,
+          "free_mib": 4243.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3560.0,
+          "free_mib": 4251.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3558.0,
+          "free_mib": 4253.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": -8.0,
+      "gpu_used_delta_from_initial_mib": 0.0
+    },
+    {
+      "budget": 16384,
+      "mode": "erase",
+      "rep": 1,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9605,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 387.711,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 1.141,
+        "cache_n": 0,
+        "prompt_n": 2200,
+        "prompt_ms": 577.483,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": {
+        "id_slot": 0,
+        "n_erased": 2254
+      },
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3558.0,
+          "free_mib": 4253.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3552.0,
+          "free_mib": 4259.0,
+          "used_range_mib": 5.0
+        },
+        "before_a2": {
+          "used_mib": 3547.0,
+          "free_mib": 4264.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3546.0,
+          "free_mib": 4265.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": -5.0,
+      "gpu_used_delta_from_initial_mib": -11.0
+    },
+    {
+      "budget": 16384,
+      "mode": "erase",
+      "rep": 2,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9528,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 393.952,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 1.0934,
+        "cache_n": 0,
+        "prompt_n": 2200,
+        "prompt_ms": 528.751,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": {
+        "id_slot": 0,
+        "n_erased": 2254
+      },
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3546.0,
+          "free_mib": 4265.0,
+          "used_range_mib": 4.0
+        },
+        "after_a1": {
+          "used_mib": 3540.0,
+          "free_mib": 4271.0,
+          "used_range_mib": 2.0
+        },
+        "before_a2": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": -2.0,
+      "gpu_used_delta_from_initial_mib": -8.0
+    },
+    {
+      "budget": 16384,
+      "mode": "keep",
+      "rep": 2,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9576,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 399.185,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.7186,
+        "cache_n": 2190,
+        "prompt_n": 10,
+        "prompt_ms": 123.971,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": null,
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 0.0,
+      "gpu_used_delta_from_initial_mib": 0.0
+    },
+    {
+      "budget": 16384,
+      "mode": "keep",
+      "rep": 3,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9522,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 399.957,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.5672,
+        "cache_n": 2190,
+        "prompt_n": 10,
+        "prompt_ms": 18.884,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": null,
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 0.0,
+      "gpu_used_delta_from_initial_mib": 0.0
+    },
+    {
+      "budget": 16384,
+      "mode": "erase",
+      "rep": 3,
+      "ok": true,
+      "a1": {
+        "ok": true,
+        "request_s": 0.9372,
+        "cache_n": 0,
+        "prompt_n": 2191,
+        "prompt_ms": 388.577,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "a2": {
+        "ok": true,
+        "request_s": 0.955,
+        "cache_n": 0,
+        "prompt_n": 2200,
+        "prompt_ms": 397.384,
+        "predicted_n": 64,
+        "slot_id": 0
+      },
+      "erase_response": {
+        "id_slot": 0,
+        "n_erased": 2254
+      },
+      "snapshots": {
+        "initial_idle": {
+          "used_mib": 3538.0,
+          "free_mib": 4273.0,
+          "used_range_mib": 0.0
+        },
+        "after_a1": {
+          "used_mib": 3537.0,
+          "free_mib": 4274.0,
+          "used_range_mib": 0.0
+        },
+        "before_a2": {
+          "used_mib": 3537.0,
+          "free_mib": 4274.0,
+          "used_range_mib": 0.0
+        },
+        "after_a2": {
+          "used_mib": 3537.0,
+          "free_mib": 4274.0,
+          "used_range_mib": 0.0
+        }
+      },
+      "gpu_used_delta_wait_mib": 0.0,
+      "gpu_used_delta_from_initial_mib": -1.0
+    }
+  ],
+  "comparison": [
+    {
+      "budget": 4096,
+      "keep_ok": 3,
+      "erase_ok": 3,
+      "keep_cache_n_median": 2190.0,
+      "erase_cache_n_median": 0.0,
+      "keep_prefill_median_ms": 24.59,
+      "erase_prefill_median_ms": 401.2,
+      "keep_vram_wait_delta_median_mib": -4.0,
+      "erase_vram_wait_delta_median_mib": -1.0,
+      "erase_minus_keep_vram_delta_mib": 3.0
+    },
+    {
+      "budget": 8192,
+      "keep_ok": 3,
+      "erase_ok": 3,
+      "keep_cache_n_median": 2190.0,
+      "erase_cache_n_median": 0.0,
+      "keep_prefill_median_ms": 21.743,
+      "erase_prefill_median_ms": 549.33,
+      "keep_vram_wait_delta_median_mib": 22.0,
+      "erase_vram_wait_delta_median_mib": 0.0,
+      "erase_minus_keep_vram_delta_mib": -22.0
+    },
+    {
+      "budget": 16384,
+      "keep_ok": 3,
+      "erase_ok": 3,
+      "keep_cache_n_median": 2190.0,
+      "erase_cache_n_median": 0.0,
+      "keep_prefill_median_ms": 22.478,
+      "erase_prefill_median_ms": 528.751,
+      "keep_vram_wait_delta_median_mib": 0.0,
+      "erase_vram_wait_delta_median_mib": -2.0,
+      "erase_minus_keep_vram_delta_mib": -2.0
+    }
+  ],
+  "interpretation_warning": "Whole-GPU memory under WSL2 is noisy. A slot erase invalidates KV tokens but does not by itself demonstrate freeing a CUDA allocation. Startup KV buffer sizes are logged allocation evidence, not proof of live resizing."
+}

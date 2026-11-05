@@ -1,0 +1,112 @@
+{
+  "date_utc": "2026-11-05T02:38:10.385876+00:00",
+  "experiment": "E9-context-growth-controlled",
+  "budget": 4096,
+  "url": "http://127.0.0.1:8080",
+  "modes": [
+    "fixed",
+    "growing"
+  ],
+  "repeats": 3,
+  "targets": [
+    900,
+    1800,
+    2700
+  ],
+  "wait_s": 1.0,
+  "n_predict": 32,
+  "sample_interval": 0.5,
+  "timeout": 180,
+  "server": {
+    "process_flags": [
+      "-hf",
+      "Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M",
+      "-ngl",
+      "99",
+      "-c",
+      "4096",
+      "-np",
+      "2",
+      "--kv-unified",
+      "--kv-unified-per-slot",
+      "4096",
+      "--cache-ram",
+      "0",
+      "--slot-save-path",
+      "/tmp/llama-e9-slots",
+      "--metrics",
+      "-cb",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "8080"
+    ],
+    "health": {
+      "status": "ok"
+    },
+    "slot_context_sizes": [
+      4096,
+      4096
+    ]
+  },
+  "prompt_hashes": {
+    "A": {
+      "fixed": [
+        "7f51c0cb52e5982ba54ee286639e157a37071ef804fc314aa156bb0cc5c512fd",
+        "bc28fd3d3853122c0845ed5db9658873933a788cc73906e64ca73b01b7652535",
+        "e3cf8a29e79c6596115a51c9c94bb58fa96e69001dc3c3e53c5e077c7e159e82"
+      ],
+      "growing": [
+        "7f51c0cb52e5982ba54ee286639e157a37071ef804fc314aa156bb0cc5c512fd",
+        "9ac15e3e00e11c8e8ddd8b9e22097fdc613728d5c422b5f76973875f48d77a53",
+        "1ab613f54522f3d33d51602878ae318092713a7bde5115e71e7d986ea33ff1b4"
+      ]
+    },
+    "B": {
+      "fixed": [
+        "ffc273c86bf9e31c92185e570fe88c5e0e727bbbe959540a2201f1f41c25a8f0",
+        "a903ca779c8f518363fb6c45e63f73ad5178aaf73fb7f5c67eaae4685343c097",
+        "a27a52f5c21c8a16d9b9623538d7481491e662b338ca9ad902797a4c82dca549"
+      ],
+      "growing": [
+        "ffc273c86bf9e31c92185e570fe88c5e0e727bbbe959540a2201f1f41c25a8f0",
+        "5f61c1195b93979612bc1d18368b2db879cb39f7f29dd44c07b74c0869237af1",
+        "5f367132d926ab072e23074ee41d162f3ce662fc73662c2521746e7e62d12cc5"
+      ]
+    }
+  },
+  "prompt_tokens": {
+    "A": {
+      "fixed": [
+        919,
+        911,
+        935
+      ],
+      "growing": [
+        919,
+        1795,
+        2695
+      ]
+    },
+    "B": {
+      "fixed": [
+        919,
+        911,
+        935
+      ],
+      "growing": [
+        919,
+        1795,
+        2695
+      ]
+    }
+  },
+  "limitations": [
+    "Synthetic tool records and sleep, not live Click tool execution",
+    "Successful synthetic task means all three LLM calls succeeded; it does not establish semantic correctness",
+    "-c is a logical KV token pool budget, not physical available VRAM",
+    "GPU used is whole-device, not process-specific KV occupancy",
+    "Token counts measured by /tokenize; /completion prefill/cache timings are runtime-dependent",
+    "Request output lengths capped by n_predict; record actual predicted_n"
+  ]
+}

@@ -1,0 +1,6 @@
+exp,name,ok,request_s,cache_n,prompt_n,prompt_ms,predicted_n,cached_field,evaluated_field,error,interferer_ok
+E2,none,True,0.639,1186,59,35.713,64,1308,1245,,
+E2,short_other_slot,True,0.628,1186,59,27.961,64,1308,1245,,True
+E2,short_same_slot,True,0.843,11,1234,252.65,64,1308,1245,,True
+E2,long_other_slot,True,0.662,1186,59,32.893,64,1308,1245,,True
+E2,long_same_slot,True,0.857,11,1234,253.314,64,1308,1245,,True

@@ -1,0 +1,9 @@
+budget,a_profile,b_profile,wait_s,paired_total,paired_both_success,sum_completed_keep,sum_completed_evict,median_keep_minus_evict_makespan_s,faster_when_both_succeed,comparison_note
+6144,A_1200,long,0.0,2,2,4,4,-0.193933,keep,Times comparable only for trials where both policies succeeded.
+6144,A_1200,long,3.0,2,2,4,4,-0.252778,keep,Times comparable only for trials where both policies succeeded.
+6144,A_1200,short,0.0,2,2,4,4,-0.176506,keep,Times comparable only for trials where both policies succeeded.
+6144,A_1200,short,3.0,2,2,4,4,-0.23965,keep,Times comparable only for trials where both policies succeeded.
+6144,A_2200,long,0.0,2,2,4,4,-0.39857,keep,Times comparable only for trials where both policies succeeded.
+6144,A_2200,long,3.0,2,2,4,4,-0.50936,keep,Times comparable only for trials where both policies succeeded.
+6144,A_2200,short,0.0,2,2,4,4,-0.36744,keep,Times comparable only for trials where both policies succeeded.
+6144,A_2200,short,3.0,2,2,4,4,-0.497506,keep,Times comparable only for trials where both policies succeeded.

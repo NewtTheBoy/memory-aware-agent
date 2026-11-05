@@ -1,0 +1,223 @@
+{
+  "environment": {
+    "requested_tokens": 2200,
+    "actual_tokens": 2190,
+    "slot": 0,
+    "gpu_index": 0,
+    "server_pid": null,
+    "contender_mib": 512
+  },
+  "trials": {
+    "keep": {
+      "mode": "keep",
+      "first": {
+        "ok": true,
+        "seconds": 1.1935,
+        "cache_n": 0,
+        "prompt_n": 2190,
+        "prompt_ms": 588.624,
+        "raw_tokens_cached": 2253,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2190,
+          "prompt_ms": 588.624,
+          "prompt_per_token_ms": 0.26877808219178084,
+          "prompt_per_second": 3720.5414661991354,
+          "predicted_n": 64,
+          "predicted_ms": 601.021,
+          "predicted_per_token_ms": 9.540015873015872,
+          "predicted_per_second": 104.82162852878686
+        }
+      },
+      "second": {
+        "ok": true,
+        "seconds": 0.6175,
+        "cache_n": 2189,
+        "prompt_n": 10,
+        "prompt_ms": 22.825,
+        "raw_tokens_cached": 2262,
+        "timings": {
+          "cache_n": 2189,
+          "prompt_n": 10,
+          "prompt_ms": 22.825,
+          "prompt_per_token_ms": 2.2824999999999998,
+          "prompt_per_second": 438.1161007667032,
+          "predicted_n": 64,
+          "predicted_ms": 591.492,
+          "predicted_per_token_ms": 9.388761904761903,
+          "predicted_per_second": 106.51031628492017
+        }
+      },
+      "erase": null,
+      "snapshots": [
+        {
+          "label": "keep:initial",
+          "timestamp": 1793838054.7079244,
+          "gpu": {
+            "used_mib": 3313.0,
+            "free_mib": 4498.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "keep:after A1",
+          "timestamp": 1793838056.0073838,
+          "gpu": {
+            "used_mib": 3315.0,
+            "free_mib": 4496.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "keep:after wait",
+          "timestamp": 1793838058.7130837,
+          "gpu": {
+            "used_mib": 3292.0,
+            "free_mib": 4519.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "keep:after A2",
+          "timestamp": 1793838059.4358418,
+          "gpu": {
+            "used_mib": 3285.0,
+            "free_mib": 4526.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        }
+      ]
+    },
+    "erase": {
+      "mode": "erase",
+      "first": {
+        "ok": true,
+        "seconds": 0.9865,
+        "cache_n": 0,
+        "prompt_n": 2190,
+        "prompt_ms": 396.068,
+        "raw_tokens_cached": 2253,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2190,
+          "prompt_ms": 396.068,
+          "prompt_per_token_ms": 0.18085296803652967,
+          "prompt_per_second": 5529.353545350798,
+          "predicted_n": 64,
+          "predicted_ms": 587.048,
+          "predicted_per_token_ms": 9.318222222222222,
+          "predicted_per_second": 107.31660784126682
+        }
+      },
+      "second": {
+        "ok": true,
+        "seconds": 0.9895,
+        "cache_n": 0,
+        "prompt_n": 2199,
+        "prompt_ms": 426.155,
+        "raw_tokens_cached": 2262,
+        "timings": {
+          "cache_n": 0,
+          "prompt_n": 2199,
+          "prompt_ms": 426.155,
+          "prompt_per_token_ms": 0.19379490677580719,
+          "prompt_per_second": 5160.094331874553,
+          "predicted_n": 64,
+          "predicted_ms": 559.459,
+          "predicted_per_token_ms": 8.880301587301586,
+          "predicted_per_second": 112.60878813282119
+        }
+      },
+      "erase": {
+        "id_slot": 0,
+        "n_erased": 2253
+      },
+      "snapshots": [
+        {
+          "label": "erase:initial",
+          "timestamp": 1793838059.5301847,
+          "gpu": {
+            "used_mib": 3284.0,
+            "free_mib": 4527.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "erase:after A1",
+          "timestamp": 1793838060.6207728,
+          "gpu": {
+            "used_mib": 3270.0,
+            "free_mib": 4541.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "erase:after wait",
+          "timestamp": 1793838063.3335373,
+          "gpu": {
+            "used_mib": 3229.0,
+            "free_mib": 4582.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        },
+        {
+          "label": "erase:after A2",
+          "timestamp": 1793838064.4267426,
+          "gpu": {
+            "used_mib": 3230.0,
+            "free_mib": 4581.0,
+            "total_mib": 8151.0
+          },
+          "llama_pids": [
+            489766
+          ],
+          "llama_process_used_mib": null,
+          "all_compute_processes": [],
+          "kv_metrics": {}
+        }
+      ]
+    }
+  }
+}

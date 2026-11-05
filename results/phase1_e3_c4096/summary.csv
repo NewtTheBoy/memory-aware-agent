@@ -1,0 +1,7 @@
+exp,name,ok,request_s,error
+E3,short_short:concurrent,2,2.5, | 
+E3,short_short:serial,2,2.751, | 
+E3,long_long:concurrent,0,1.295,"HTTP 500 /completion: {""error"":{""code"":500,""message"":""Context size has been exceeded."",""type"":""serve | HTTP 500 /completion: {""error"":{""code"":500,""message"":""Context size has been exceeded."",""type"":""serve"
+E3,long_long:serial,2,2.97, | 
+E3,short_long:concurrent,2,2.847, | 
+E3,short_long:serial,2,2.646, | 

@@ -1,0 +1,7 @@
+mix,wait_s,paired_valid_n,median_preserve_minus_reuse_makespan_s,winner_by_median,note
+short_short,0.0,3,0.238357,reuse,positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage
+short_short,3.0,3,-0.256305,preserve,positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage
+short_short,8.0,3,-0.227301,preserve,positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage
+short_long,0.0,3,0.220868,reuse,positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage
+short_long,3.0,3,-0.100214,preserve,positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage
+short_long,8.0,3,-0.234262,preserve,positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage

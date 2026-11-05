@@ -1,0 +1,234 @@
+{
+  "date_utc": "2026-11-04T10:30:28.397519+00:00",
+  "description": "Phase 1 exploratory characterization; no scheduler added",
+  "params": {
+    "url": "http://127.0.0.1:8080",
+    "expect_ctx": 8192,
+    "experiment": "e2",
+    "a_tokens": 1200,
+    "b_short_tokens": 1200,
+    "b_long_tokens": 2600,
+    "n_predict": 64,
+    "waits": [
+      0,
+      3,
+      8
+    ],
+    "gap": 3.0,
+    "timeout": 180,
+    "interval": 0.3,
+    "out_dir": "results/phase1_e2_c8192"
+  },
+  "measured_prompt_tokens": {
+    "A": 1187,
+    "B_short": 1218,
+    "B_long": 2612
+  },
+  "verified_local_server": {
+    "server_context_capacity_arg": 8192,
+    "process_command": "403096 ./build/bin/llama-server -hf Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M -ngl 99 -c 8192 -np 2 --kv-unified --kv-unified-per-slot 4096 --cache-ram 0 --slot-save-path /tmp/llama-e1-slots --metrics -cb --host 127.0.0.1 --port 8080"
+  },
+  "slot_context_limits": [
+    4096,
+    4096
+  ],
+  "records": [
+    {
+      "experiment": "E2",
+      "scenario": "none",
+      "gap_target_s": 3.0,
+      "gap_actual_s": 3.0,
+      "step1": {
+        "ok": true,
+        "request_s": 0.857,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 249.219,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "interferer": null,
+      "step2": {
+        "ok": true,
+        "request_s": 0.639,
+        "cache_n": 1186,
+        "prompt_n": 59,
+        "prompt_ms": 35.713,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "note": "same_slot replaces slot-0 context; other_slot can still compete for shared KV. Cache reuse measured by timings cache_n/prompt_n, not allocated VRAM."
+    },
+    {
+      "experiment": "E2",
+      "scenario": "short_other_slot",
+      "gap_target_s": 3.0,
+      "gap_actual_s": 3.0,
+      "step1": {
+        "ok": true,
+        "request_s": 0.84,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 237.42,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "interferer": {
+        "ok": true,
+        "request_s": 0.888,
+        "cache_n": 0,
+        "prompt_n": 1218,
+        "prompt_ms": 258.944,
+        "predicted_n": 64,
+        "cached_field": 1281,
+        "evaluated_field": 1218,
+        "error": null
+      },
+      "step2": {
+        "ok": true,
+        "request_s": 0.628,
+        "cache_n": 1186,
+        "prompt_n": 59,
+        "prompt_ms": 27.961,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "note": "same_slot replaces slot-0 context; other_slot can still compete for shared KV. Cache reuse measured by timings cache_n/prompt_n, not allocated VRAM."
+    },
+    {
+      "experiment": "E2",
+      "scenario": "short_same_slot",
+      "gap_target_s": 3.0,
+      "gap_actual_s": 3.0,
+      "step1": {
+        "ok": true,
+        "request_s": 0.818,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 232.471,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "interferer": {
+        "ok": true,
+        "request_s": 0.847,
+        "cache_n": 0,
+        "prompt_n": 1218,
+        "prompt_ms": 236.089,
+        "predicted_n": 64,
+        "cached_field": 1281,
+        "evaluated_field": 1218,
+        "error": null
+      },
+      "step2": {
+        "ok": true,
+        "request_s": 0.843,
+        "cache_n": 11,
+        "prompt_n": 1234,
+        "prompt_ms": 252.65,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "note": "same_slot replaces slot-0 context; other_slot can still compete for shared KV. Cache reuse measured by timings cache_n/prompt_n, not allocated VRAM."
+    },
+    {
+      "experiment": "E2",
+      "scenario": "long_other_slot",
+      "gap_target_s": 3.0,
+      "gap_actual_s": 3.0,
+      "step1": {
+        "ok": true,
+        "request_s": 0.849,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 264.005,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "interferer": {
+        "ok": true,
+        "request_s": 1.225,
+        "cache_n": 0,
+        "prompt_n": 2612,
+        "prompt_ms": 579.895,
+        "predicted_n": 64,
+        "cached_field": 2675,
+        "evaluated_field": 2612,
+        "error": null
+      },
+      "step2": {
+        "ok": true,
+        "request_s": 0.662,
+        "cache_n": 1186,
+        "prompt_n": 59,
+        "prompt_ms": 32.893,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "note": "same_slot replaces slot-0 context; other_slot can still compete for shared KV. Cache reuse measured by timings cache_n/prompt_n, not allocated VRAM."
+    },
+    {
+      "experiment": "E2",
+      "scenario": "long_same_slot",
+      "gap_target_s": 3.0,
+      "gap_actual_s": 3.0,
+      "step1": {
+        "ok": true,
+        "request_s": 0.859,
+        "cache_n": 0,
+        "prompt_n": 1187,
+        "prompt_ms": 250.321,
+        "predicted_n": 64,
+        "cached_field": 1250,
+        "evaluated_field": 1187,
+        "error": null
+      },
+      "interferer": {
+        "ok": true,
+        "request_s": 1.175,
+        "cache_n": 0,
+        "prompt_n": 2612,
+        "prompt_ms": 549.589,
+        "predicted_n": 64,
+        "cached_field": 2675,
+        "evaluated_field": 2612,
+        "error": null
+      },
+      "step2": {
+        "ok": true,
+        "request_s": 0.857,
+        "cache_n": 11,
+        "prompt_n": 1234,
+        "prompt_ms": 253.314,
+        "predicted_n": 64,
+        "cached_field": 1308,
+        "evaluated_field": 1245,
+        "error": null
+      },
+      "note": "same_slot replaces slot-0 context; other_slot can still compete for shared KV. Cache reuse measured by timings cache_n/prompt_n, not allocated VRAM."
+    }
+  ],
+  "limitations": [
+    "nvidia-smi allocations do not measure live KV cells",
+    "cache_n/prompt_n are response metrics, not direct GPU KV occupancy",
+    "fixed sleep simulates tool waiting; it is not a real external tool",
+    "cache behavior may depend on llama.cpp version and KV budget",
+    "results depend on server startup flags; record pgrep -af llama-server"
+  ]
+}

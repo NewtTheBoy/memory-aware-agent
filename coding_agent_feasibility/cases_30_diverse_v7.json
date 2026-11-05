@@ -1,0 +1,318 @@
+{
+  "project": "CSE291A memory-aware agent serving",
+  "repository": "pallets/click",
+  "repo_commit": "2247b35ea1c47c727d7a06e51fa280e12a863ff6",
+  "status": "v7 task-specified workload diversity pilot; execution/accuracy not yet validated",
+  "ground_truth_handling": "Labels are evaluator-only and must not be passed to the agent.",
+  "scoring": "Use implementation_localization_correct as primary task-quality gate; report strict test-file match separately; focused pytest is not evidence of bug fix.",
+  "memory_note": "Do not assume short/medium/long from task names: profile tokens, number of LLM/tool steps, critical-path time, and KV occupancy after running each task.",
+  "cases": [
+    {
+      "id": "group_resolution",
+      "category": "Command flow",
+      "question": "Investigate how a Click command group resolves a subcommand name into the command it will invoke. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/core.py",
+      "expected_symbol": "Group.resolve_command",
+      "expected_test": "tests/test_commands.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    },
+    {
+      "id": "context_invoke",
+      "category": "Command flow",
+      "question": "Investigate how Click invokes another command or callback from an existing invocation context, including forwarding arguments and preparing defaults. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/core.py",
+      "expected_symbol": "Context.invoke",
+      "expected_test": "tests/test_commands.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "call_trace"
+    },
+    {
+      "id": "context_forward",
+      "category": "Command flow",
+      "question": "Investigate how Click forwards the current context's parameters when invoking another command. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/core.py",
+      "expected_symbol": "Context.forward",
+      "expected_test": "tests/test_commands.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "test_evidence"
+    },
+    {
+      "id": "command_entry",
+      "category": "Command flow",
+      "question": "Investigate how a Click command handles top-level execution, including argument processing and command exit behavior. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/core.py",
+      "expected_symbol": "Command.main",
+      "expected_test": "tests/test_basic.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "call_trace"
+    },
+    {
+      "id": "group_invocation",
+      "category": "Command flow",
+      "question": "Investigate how a Click command group executes its selected subcommands, including behavior when commands are chained. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/core.py",
+      "expected_symbol": "Group.invoke",
+      "expected_test": "tests/test_chain.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "call_trace"
+    },
+    {
+      "id": "completion_context",
+      "category": "Command flow",
+      "question": "Investigate how Click reconstructs the active command context from a partially entered command line for shell completion. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/shell_completion.py",
+      "expected_symbol": "_resolve_context",
+      "expected_test": "tests/test_shell_completion.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "call_trace"
+    },
+    {
+      "id": "option_decorator",
+      "category": "Decorators and parameters",
+      "question": "Investigate where Click implements the decorator that declares command-line options and how it attaches those options to commands. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/decorators.py",
+      "expected_symbol": "option",
+      "expected_test": "tests/test_options.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    },
+    {
+      "id": "argument_decorator",
+      "category": "Decorators and parameters",
+      "question": "Investigate how Click declares positional command-line arguments through decorators and attaches them to callbacks. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/decorators.py",
+      "expected_symbol": "argument",
+      "expected_test": "tests/test_arguments.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    },
+    {
+      "id": "command_decorator",
+      "category": "Decorators and parameters",
+      "question": "Investigate how Click converts a Python callback into a command object using its command decorator. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/decorators.py",
+      "expected_symbol": "command",
+      "expected_test": "tests/test_command_decorators.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "test_evidence"
+    },
+    {
+      "id": "group_decorator",
+      "category": "Decorators and parameters",
+      "question": "Investigate how Click turns a callback into a command group through a decorator. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/decorators.py",
+      "expected_symbol": "group",
+      "expected_test": "tests/test_command_decorators.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "test_evidence"
+    },
+    {
+      "id": "option_prompt",
+      "category": "Decorators and parameters",
+      "question": "Investigate how Click obtains an option value interactively when prompting is required. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/core.py",
+      "expected_symbol": "Option.prompt_for_value",
+      "expected_test": "tests/test_options.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "call_trace"
+    },
+    {
+      "id": "option_consume",
+      "category": "Decorators and parameters",
+      "question": "Investigate how Click resolves an option's value from command-line input or other configured sources during parsing. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/core.py",
+      "expected_symbol": "Option.consume_value",
+      "expected_test": "tests/test_options.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "call_trace"
+    },
+    {
+      "id": "choice_error",
+      "category": "Type conversion",
+      "question": "Investigate how Click builds the error message when a user provides an invalid value for an enumerated choice. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/types.py",
+      "expected_symbol": "Choice.get_invalid_choice_message",
+      "expected_test": "tests/test_types/test_Choice.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "test_evidence"
+    },
+    {
+      "id": "int_range_clamp",
+      "category": "Type conversion",
+      "question": "Investigate how Click clamps integer values to a configured inclusive or exclusive range boundary when range clamping is enabled. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/types.py",
+      "expected_symbol": "IntRange._clamp",
+      "expected_test": "tests/test_types/test_IntRange.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "test_evidence"
+    },
+    {
+      "id": "float_range_clamp",
+      "category": "Type conversion",
+      "question": "Investigate how Click clamps floating-point values to allowed range boundaries, including open boundaries. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/types.py",
+      "expected_symbol": "FloatRange._clamp",
+      "expected_test": "tests/test_types/test_FloatRange.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "test_evidence"
+    },
+    {
+      "id": "file_type_convert",
+      "category": "Type conversion",
+      "question": "Investigate how Click converts a command-line file argument into an appropriate file handle or lazy file object. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/types.py",
+      "expected_symbol": "File.convert",
+      "expected_test": "tests/test_types/test_File.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "deep"
+    },
+    {
+      "id": "path_type_convert",
+      "category": "Type conversion",
+      "question": "Investigate how Click validates and converts command-line filesystem paths based on file and directory constraints. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/types.py",
+      "expected_symbol": "Path.convert",
+      "expected_test": "tests/test_types/test_Path.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "deep"
+    },
+    {
+      "id": "custom_type_convert",
+      "category": "Type conversion",
+      "question": "Investigate how Click adapts a user-supplied conversion function into a command-line parameter type and reports conversion errors. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/types.py",
+      "expected_symbol": "FuncParamType.convert",
+      "expected_test": "tests/test_types/test_FuncParamType.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    },
+    {
+      "id": "confirmation",
+      "category": "Terminal and help",
+      "question": "Investigate how Click displays a yes/no confirmation question to terminal users and interprets their response. Locate the implementation and the related tests. Do not edit files.",
+      "expected_source": "src/click/termui.py",
+      "expected_symbol": "confirm",
+      "expected_test": "tests/test_termui.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    },
+    {
+      "id": "terminal_prompt",
+      "category": "Terminal and help",
+      "question": "Investigate how Click prompts terminal users for input, processes defaults, and validates entered values. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/termui.py",
+      "expected_symbol": "prompt",
+      "expected_test": "tests/test_termui.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "call_trace"
+    },
+    {
+      "id": "terminal_style",
+      "category": "Terminal and help",
+      "question": "Investigate how Click generates ANSI-styled terminal text from color and text-decoration options. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/termui.py",
+      "expected_symbol": "style",
+      "expected_test": "tests/test_utils/test_style.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    },
+    {
+      "id": "echo_output",
+      "category": "Terminal and help",
+      "question": "Investigate how Click writes text to terminal output streams while handling encodings and color support. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/utils.py",
+      "expected_symbol": "echo",
+      "expected_test": "tests/test_utils/test_echo.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "deep"
+    },
+    {
+      "id": "usage_formatter",
+      "category": "Terminal and help",
+      "question": "Investigate how Click constructs and writes the usage line displayed in command help text. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/formatting.py",
+      "expected_symbol": "HelpFormatter.write_usage",
+      "expected_test": "tests/test_formatting.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    },
+    {
+      "id": "help_definition_list",
+      "category": "Terminal and help",
+      "question": "Investigate how Click formats aligned definition-list entries such as options and their help descriptions. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/formatting.py",
+      "expected_symbol": "HelpFormatter.write_dl",
+      "expected_test": "tests/test_formatting.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    },
+    {
+      "id": "cli_runner",
+      "category": "Testing and utilities",
+      "question": "Investigate how Click's command-line testing helper runs a command and captures its output, return value, and exception. Locate the implementation and the related tests. Do not edit files.",
+      "expected_source": "src/click/testing.py",
+      "expected_symbol": "CliRunner.invoke",
+      "expected_test": "tests/test_testing.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    },
+    {
+      "id": "runner_isolation",
+      "category": "Testing and utilities",
+      "question": "Investigate how Click's test runner temporarily isolates input and output streams and environment variables during a command invocation. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/testing.py",
+      "expected_symbol": "CliRunner.isolation",
+      "expected_test": "tests/test_testing.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "deep"
+    },
+    {
+      "id": "isolated_filesystem",
+      "category": "Testing and utilities",
+      "question": "Investigate how Click's test runner creates a temporary filesystem working directory for tests and restores the original directory afterwards. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/testing.py",
+      "expected_symbol": "CliRunner.isolated_filesystem",
+      "expected_test": "tests/test_testing.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "test_evidence"
+    },
+    {
+      "id": "open_file",
+      "category": "Testing and utilities",
+      "question": "Investigate how Click opens a file by path while handling standard input/output, lazy access, and atomic writing. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/utils.py",
+      "expected_symbol": "open_file",
+      "expected_test": "tests/test_utils/test_open_file.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "deep"
+    },
+    {
+      "id": "expand_args",
+      "category": "Testing and utilities",
+      "question": "Investigate how Click expands command-line argument patterns into matching filesystem paths on platforms where shell expansion is unavailable. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/utils.py",
+      "expected_symbol": "_expand_args",
+      "expected_test": "tests/test_utils/test__expand_args.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "deep"
+    },
+    {
+      "id": "detect_program_name",
+      "category": "Testing and utilities",
+      "question": "Investigate how Click determines a human-readable program name from the invocation environment and the Python entry point. Locate the implementation and related tests. Do not edit files.",
+      "expected_source": "src/click/utils.py",
+      "expected_symbol": "_detect_program_name",
+      "expected_test": "tests/test_utils/test__detect_program_name.py",
+      "complexity": "unmeasured",
+      "investigation_profile": "basic"
+    }
+  ],
+  "investigation_profiles": {
+    "basic": "Locate source implementation and relevant test module",
+    "test_evidence": "Also read real test function body and analyze its assertions",
+    "call_trace": "Also inspect an actual source helper directly called by selected implementation",
+    "deep": "Both test-evidence inspection and called-helper trace"
+  },
+  "design_note": "Primary source/symbol/test ground truth and original questions remain unchanged from v6. Profiles are public task requirements; they are not evaluator answers."
+}

@@ -1,0 +1,4 @@
+budget,kv_gpu_mib_log,n_slots,per_slot,pre_server_used_mib,server_idle_used_mib,post_server_used_mib,startup_delta_mib,shutdown_drop_mib,log_path
+4096,,2,4096,937.0,3124.0,918.0,2187.0,2206.0,results/phase1_e8_physical_vram/server_logs/llama_c4096.log
+8192,,2,4096,917.0,3252.0,931.0,2335.0,2321.0,results/phase1_e8_physical_vram/server_logs/llama_c8192.log
+16384,,2,4096,930.0,3565.0,906.0,2635.0,2659.0,results/phase1_e8_physical_vram/server_logs/llama_c16384.log

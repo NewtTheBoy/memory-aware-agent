@@ -1,0 +1,81 @@
+{
+  "experiment": "E6",
+  "created_utc": "2026-11-04T12:23:24.476639+00:00",
+  "kv_budget": 8192,
+  "configuration": {
+    "url": "http://127.0.0.1:8080",
+    "expect_ctx": 8192,
+    "aggregate": null,
+    "mode": "both",
+    "waits": [
+      0.0,
+      3.0
+    ],
+    "mixes": [
+      "short_long",
+      "long_long"
+    ],
+    "b_profiles": [
+      "short",
+      "long"
+    ],
+    "a_tokens": [
+      1200,
+      2200
+    ],
+    "short_tokens": 1200,
+    "long_tokens": 2600,
+    "a_predict": 64,
+    "bc_predict": 128,
+    "repeats": 2,
+    "timeout": 180,
+    "sample_interval": 0.5,
+    "out_dir": "results/phase1_e6_c8192"
+  },
+  "server": {
+    "startup": {
+      "server_context_capacity_arg": 8192,
+      "process_command": "434464 ./llama.cpp/build/bin/llama-server -hf Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M -ngl 99 -c 8192 -np 2 --kv-unified --kv-unified-per-slot 4096 --cache-ram 0 --slot-save-path /tmp/llama-e6-slots-8192 --metrics -cb --host 127.0.0.1 --port 8080"
+    },
+    "slot_limits": [
+      4096,
+      4096
+    ],
+    "health": {
+      "status": "ok"
+    }
+  },
+  "measured_prompts": {
+    "A_1200": {
+      "tokens": 1188,
+      "sha256": "91b41219cc2f781124ca25fd8186b2cdf428716b29d9f8031ed4e587fe6f90db"
+    },
+    "A_2200": {
+      "tokens": 2200,
+      "sha256": "26d732d15074bb9c7f3c28c6ca041f298e237ec660e882ec074663f3f755e091"
+    },
+    "B_SHORT": {
+      "tokens": 1206,
+      "sha256": "06d30d4b4f354f0bd4748fe96637c05074cc92954e35e0d6bb1d1262db14ae64"
+    },
+    "C_SHORT": {
+      "tokens": 1206,
+      "sha256": "d304ceb7cf3689477fd4b7e9c0d61880e56311e0ffd4f0e8dbe044374723684b"
+    },
+    "B_LONG": {
+      "tokens": 2592,
+      "sha256": "394bd4ed7c4270861ebf8be29f3ddc80d162ac3eb51fb5ccad42930c5a94cd89"
+    },
+    "C_LONG": {
+      "tokens": 2592,
+      "sha256": "eabeb4fa0b93b171030f3ca5e68dd0f4b184ab8e9cde0f16124b16e715f8a9f9"
+    }
+  },
+  "limitations": [
+    "-c is logical KV pool size in tokens, not physical free VRAM.",
+    "Client-side preserve reserves slot0, not guaranteed KV pinning.",
+    "Idle probe never overlaps model calls and is not a throughput benchmark.",
+    "/slots token counters and whole-device nvidia-smi are not allocated KV-cell occupancy.",
+    "Requests use synthetic reproducible contexts; tool waiting is sleep."
+  ]
+}

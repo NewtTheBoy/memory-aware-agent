@@ -1,0 +1,4 @@
+budget,keep_ok,erase_ok,keep_cache_n_median,erase_cache_n_median,keep_prefill_median_ms,erase_prefill_median_ms,keep_vram_wait_delta_median_mib,erase_vram_wait_delta_median_mib,erase_minus_keep_vram_delta_mib
+4096,3,3,2190.0,0.0,24.59,401.2,-4.0,-1.0,3.0
+8192,3,3,2190.0,0.0,21.743,549.33,22.0,0.0,-22.0
+16384,3,3,2190.0,0.0,22.478,528.751,0.0,-2.0,-2.0

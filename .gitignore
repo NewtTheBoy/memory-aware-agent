@@ -1,0 +1,26 @@
+# Python environments and caches
+.venv/
+.venv-coding/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Model weights and external repositories
+*.gguf
+coding-repos/
+llama.cpp/
+tau2-bench/
+
+# Old archives
+*.zip
+*.tar.gz
+*:Zone.Identifier
+
+# Temporary outputs
+logs/
+outputs/
+tmp/
+*.log
+
+# Large exploratory dataset
+ShareGPT_V3_unfiltered_cleaned_split.json

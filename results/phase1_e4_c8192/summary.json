@@ -1,0 +1,4547 @@
+{
+  "created_utc": "2026-11-04T11:05:47.591962+00:00",
+  "experiment": "E4",
+  "description": "Client-enforced slot reservation vs reuse, controlled tool wait. Not CPU/SSD swap, KV pinning, or an adaptive scheduler.",
+  "configuration": {
+    "url": "http://127.0.0.1:8080",
+    "expect_ctx": 8192,
+    "waits": [
+      0.0,
+      3.0,
+      8.0
+    ],
+    "mixes": [
+      "short_short",
+      "short_long"
+    ],
+    "repeats": 3,
+    "a_tokens": 1200,
+    "short_tokens": 1200,
+    "long_tokens": 2600,
+    "a_predict": 64,
+    "bc_predict": 128,
+    "timeout": 180,
+    "out_dir": "results/phase1_e4_c8192"
+  },
+  "server": {
+    "server_context_capacity_arg": 8192,
+    "process_command": "410253 ./build/bin/llama-server -hf Qwen/Qwen2.5-3B-Instruct-GGUF:Q4_K_M -ngl 99 -c 8192 -np 2 --kv-unified --kv-unified-per-slot 4096 --cache-ram 0 --slot-save-path /tmp/llama-e4-slots --metrics -cb --host 127.0.0.1 --port 8080"
+  },
+  "slot_context_limits": [
+    4096,
+    4096
+  ],
+  "prompt_sizes": {
+    "A": 1217,
+    "B_SHORT": 1206,
+    "C_SHORT": 1206,
+    "B_LONG": 2592,
+    "C_LONG": 2592
+  },
+  "group_medians": [
+    {
+      "mix": "short_short",
+      "wait_s": 0.0,
+      "policy": "preserve",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 4.223013,
+      "median_phase_makespan_s": 3.340713,
+      "median_throughput_completed_tasks_s": 0.710393,
+      "median_a_completion_s": 2.034404,
+      "median_a2_request_s": 1.147,
+      "median_a2_queue_s": 0.001144,
+      "median_a2_cache_n": 1216.0,
+      "median_a2_prompt_n": 54.0,
+      "median_a2_prompt_ms": 30.391,
+      "median_b_completion_from_arrival_s": 1.806337,
+      "median_c_completion_from_arrival_s": 3.340713,
+      "median_b_queue_s": 0.000277,
+      "median_c_queue_s": 1.80647
+    },
+    {
+      "mix": "short_short",
+      "wait_s": 0.0,
+      "policy": "reuse",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 3.984727,
+      "median_phase_makespan_s": 3.101318,
+      "median_throughput_completed_tasks_s": 0.752875,
+      "median_a_completion_s": 3.984727,
+      "median_a2_request_s": 0.945,
+      "median_a2_queue_s": 2.156083,
+      "median_a2_cache_n": 11.0,
+      "median_a2_prompt_n": 1259.0,
+      "median_a2_prompt_ms": 282.905,
+      "median_b_completion_from_arrival_s": 2.155967,
+      "median_c_completion_from_arrival_s": 2.172435,
+      "median_b_queue_s": 0.000336,
+      "median_c_queue_s": 0.000768
+    },
+    {
+      "mix": "short_short",
+      "wait_s": 3.0,
+      "policy": "preserve",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 4.520363,
+      "median_phase_makespan_s": 3.656489,
+      "median_throughput_completed_tasks_s": 0.663664,
+      "median_a_completion_s": 4.520363,
+      "median_a2_request_s": 0.656,
+      "median_a2_queue_s": 0.000154,
+      "median_a2_cache_n": 1216.0,
+      "median_a2_prompt_n": 54.0,
+      "median_a2_prompt_ms": 28.642,
+      "median_b_completion_from_arrival_s": 1.556007,
+      "median_c_completion_from_arrival_s": 2.426719,
+      "median_b_queue_s": 0.000261,
+      "median_c_queue_s": 1.556251
+    },
+    {
+      "mix": "short_short",
+      "wait_s": 3.0,
+      "policy": "reuse",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 4.777683,
+      "median_phase_makespan_s": 3.902489,
+      "median_throughput_completed_tasks_s": 0.627919,
+      "median_a_completion_s": 4.777683,
+      "median_a2_request_s": 0.902,
+      "median_a2_queue_s": 0.000134,
+      "median_a2_cache_n": 11.0,
+      "median_a2_prompt_n": 1259.0,
+      "median_a2_prompt_ms": 267.937,
+      "median_b_completion_from_arrival_s": 2.144658,
+      "median_c_completion_from_arrival_s": 2.160546,
+      "median_b_queue_s": 0.000312,
+      "median_c_queue_s": 0.000794
+    },
+    {
+      "mix": "short_short",
+      "wait_s": 8.0,
+      "policy": "preserve",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 9.529495,
+      "median_phase_makespan_s": 8.672861,
+      "median_throughput_completed_tasks_s": 0.314812,
+      "median_a_completion_s": 9.529495,
+      "median_a2_request_s": 0.673,
+      "median_a2_queue_s": 0.000168,
+      "median_a2_cache_n": 1216.0,
+      "median_a2_prompt_n": 54.0,
+      "median_a2_prompt_ms": 29.098,
+      "median_b_completion_from_arrival_s": 1.572038,
+      "median_c_completion_from_arrival_s": 2.431702,
+      "median_b_queue_s": 0.000367,
+      "median_c_queue_s": 1.572138
+    },
+    {
+      "mix": "short_short",
+      "wait_s": 8.0,
+      "policy": "reuse",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 9.771052,
+      "median_phase_makespan_s": 8.900431,
+      "median_throughput_completed_tasks_s": 0.307029,
+      "median_a_completion_s": 9.771052,
+      "median_a2_request_s": 0.9,
+      "median_a2_queue_s": 0.000206,
+      "median_a2_cache_n": 11.0,
+      "median_a2_prompt_n": 1259.0,
+      "median_a2_prompt_ms": 276.097,
+      "median_b_completion_from_arrival_s": 2.188326,
+      "median_c_completion_from_arrival_s": 2.179863,
+      "median_b_queue_s": 0.000349,
+      "median_c_queue_s": 0.000882
+    },
+    {
+      "mix": "short_long",
+      "wait_s": 0.0,
+      "policy": "preserve",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 4.536586,
+      "median_phase_makespan_s": 3.665849,
+      "median_throughput_completed_tasks_s": 0.66129,
+      "median_a_completion_s": 1.997234,
+      "median_a2_request_s": 1.125,
+      "median_a2_queue_s": 0.001175,
+      "median_a2_cache_n": 1216.0,
+      "median_a2_prompt_n": 54.0,
+      "median_a2_prompt_ms": 28.918,
+      "median_b_completion_from_arrival_s": 1.769974,
+      "median_c_completion_from_arrival_s": 3.665849,
+      "median_b_queue_s": 0.000276,
+      "median_c_queue_s": 1.770092
+    },
+    {
+      "mix": "short_long",
+      "wait_s": 0.0,
+      "policy": "reuse",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 4.297812,
+      "median_phase_makespan_s": 3.443166,
+      "median_throughput_completed_tasks_s": 0.69803,
+      "median_a_completion_s": 4.297812,
+      "median_a2_request_s": 0.974,
+      "median_a2_queue_s": 2.474671,
+      "median_a2_cache_n": 11.0,
+      "median_a2_prompt_n": 1259.0,
+      "median_a2_prompt_ms": 293.536,
+      "median_b_completion_from_arrival_s": 2.474456,
+      "median_c_completion_from_arrival_s": 2.785409,
+      "median_b_queue_s": 0.000327,
+      "median_c_queue_s": 0.000929
+    },
+    {
+      "mix": "short_long",
+      "wait_s": 3.0,
+      "policy": "preserve",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 4.702605,
+      "median_phase_makespan_s": 3.824254,
+      "median_throughput_completed_tasks_s": 0.637944,
+      "median_a_completion_s": 4.702605,
+      "median_a2_request_s": 0.824,
+      "median_a2_queue_s": 0.000154,
+      "median_a2_cache_n": 1216.0,
+      "median_a2_prompt_n": 54.0,
+      "median_a2_prompt_ms": 29.394,
+      "median_b_completion_from_arrival_s": 1.578276,
+      "median_c_completion_from_arrival_s": 3.630957,
+      "median_b_queue_s": 0.000322,
+      "median_c_queue_s": 1.578398
+    },
+    {
+      "mix": "short_long",
+      "wait_s": 3.0,
+      "policy": "reuse",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 4.802819,
+      "median_phase_makespan_s": 3.939543,
+      "median_throughput_completed_tasks_s": 0.624633,
+      "median_a_completion_s": 4.802819,
+      "median_a2_request_s": 0.939,
+      "median_a2_queue_s": 0.000203,
+      "median_a2_cache_n": 11.0,
+      "median_a2_prompt_n": 1259.0,
+      "median_a2_prompt_ms": 283.91,
+      "median_b_completion_from_arrival_s": 2.470458,
+      "median_c_completion_from_arrival_s": 2.501245,
+      "median_b_queue_s": 0.000301,
+      "median_c_queue_s": 0.000777
+    },
+    {
+      "mix": "short_long",
+      "wait_s": 8.0,
+      "policy": "preserve",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 9.576594,
+      "median_phase_makespan_s": 8.707686,
+      "median_throughput_completed_tasks_s": 0.313264,
+      "median_a_completion_s": 9.576594,
+      "median_a2_request_s": 0.708,
+      "median_a2_queue_s": 0.000135,
+      "median_a2_cache_n": 1216.0,
+      "median_a2_prompt_n": 54.0,
+      "median_a2_prompt_ms": 30.212,
+      "median_b_completion_from_arrival_s": 1.563601,
+      "median_c_completion_from_arrival_s": 3.44142,
+      "median_b_queue_s": 0.000364,
+      "median_c_queue_s": 1.56369
+    },
+    {
+      "mix": "short_long",
+      "wait_s": 8.0,
+      "policy": "reuse",
+      "valid_n": 3,
+      "failed_n": 0,
+      "median_total_makespan_s": 9.819152,
+      "median_phase_makespan_s": 8.955462,
+      "median_throughput_completed_tasks_s": 0.305525,
+      "median_a_completion_s": 9.819152,
+      "median_a2_request_s": 0.955,
+      "median_a2_queue_s": 0.000167,
+      "median_a2_cache_n": 11.0,
+      "median_a2_prompt_n": 1259.0,
+      "median_a2_prompt_ms": 290.191,
+      "median_b_completion_from_arrival_s": 2.480339,
+      "median_c_completion_from_arrival_s": 2.509522,
+      "median_b_queue_s": 0.000387,
+      "median_c_queue_s": 0.000831
+    }
+  ],
+  "policy_comparison": [
+    {
+      "mix": "short_short",
+      "wait_s": 0.0,
+      "paired_valid_n": 3,
+      "median_preserve_minus_reuse_makespan_s": 0.238357,
+      "winner_by_median": "reuse",
+      "note": "positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage"
+    },
+    {
+      "mix": "short_short",
+      "wait_s": 3.0,
+      "paired_valid_n": 3,
+      "median_preserve_minus_reuse_makespan_s": -0.256305,
+      "winner_by_median": "preserve",
+      "note": "positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage"
+    },
+    {
+      "mix": "short_short",
+      "wait_s": 8.0,
+      "paired_valid_n": 3,
+      "median_preserve_minus_reuse_makespan_s": -0.227301,
+      "winner_by_median": "preserve",
+      "note": "positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage"
+    },
+    {
+      "mix": "short_long",
+      "wait_s": 0.0,
+      "paired_valid_n": 3,
+      "median_preserve_minus_reuse_makespan_s": 0.220868,
+      "winner_by_median": "reuse",
+      "note": "positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage"
+    },
+    {
+      "mix": "short_long",
+      "wait_s": 3.0,
+      "paired_valid_n": 3,
+      "median_preserve_minus_reuse_makespan_s": -0.100214,
+      "winner_by_median": "preserve",
+      "note": "positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage"
+    },
+    {
+      "mix": "short_long",
+      "wait_s": 8.0,
+      "paired_valid_n": 3,
+      "median_preserve_minus_reuse_makespan_s": -0.234262,
+      "winner_by_median": "preserve",
+      "note": "positive delta = reuse has shorter total makespan; not necessarily a statistically established advantage"
+    }
+  ],
+  "trials": [
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:07.669979+00:00",
+      "mix": "short_short",
+      "policy": "reuse",
+      "wait_s": 0.0,
+      "repeat": 1,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.978193,
+      "a2_eligible_s": 0.978193,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 0
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 0
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 3e-06,
+          "end_s": 0.978193,
+          "queue_s": 3e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.978,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 364.351,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.978193,
+          "start_s": 0.978529,
+          "end_s": 3.169795,
+          "queue_s": 0.000336,
+          "response": {
+            "ok": true,
+            "request_s": 2.191,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 303.27,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.978193,
+          "start_s": 0.978961,
+          "end_s": 3.186785,
+          "queue_s": 0.000768,
+          "response": {
+            "ok": true,
+            "request_s": 2.208,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 262.518,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.978193,
+          "start_s": 3.1699,
+          "end_s": 4.117268,
+          "queue_s": 2.191707,
+          "response": {
+            "ok": true,
+            "request_s": 0.947,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 291.267,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.117268,
+      "phase_makespan_s": 3.139075,
+      "throughput_completed_tasks_s": 0.728639,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.117268,
+      "a2_request_s": 0.947,
+      "a2_queue_s": 2.191707,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 291.267,
+      "b_completion_from_arrival_s": 2.191602,
+      "b_queue_s": 0.000336,
+      "c_completion_from_arrival_s": 2.208592,
+      "c_queue_s": 0.000768
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:11.895250+00:00",
+      "mix": "short_short",
+      "policy": "preserve",
+      "wait_s": 0.0,
+      "repeat": 1,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.8823,
+      "a2_eligible_s": 0.8823,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.8823,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.882,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 257.995,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.8823,
+          "start_s": 0.883278,
+          "end_s": 2.049979,
+          "queue_s": 0.000978,
+          "response": {
+            "ok": true,
+            "request_s": 1.167,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 64.925,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.8823,
+          "start_s": 0.882547,
+          "end_s": 2.691687,
+          "queue_s": 0.000247,
+          "response": {
+            "ok": true,
+            "request_s": 1.809,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 263.758,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.8823,
+          "start_s": 2.691803,
+          "end_s": 4.223013,
+          "queue_s": 1.809503,
+          "response": {
+            "ok": true,
+            "request_s": 1.531,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 267.121,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.223013,
+      "phase_makespan_s": 3.340713,
+      "throughput_completed_tasks_s": 0.710393,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 2.049979,
+      "a2_request_s": 1.167,
+      "a2_queue_s": 0.000978,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 64.925,
+      "b_completion_from_arrival_s": 1.809387,
+      "b_queue_s": 0.000247,
+      "c_completion_from_arrival_s": 3.340713,
+      "c_queue_s": 1.809503
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:16.386104+00:00",
+      "mix": "short_short",
+      "policy": "preserve",
+      "wait_s": 3.0,
+      "repeat": 1,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.846556,
+      "a2_eligible_s": 3.846556,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.846556,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.847,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 255.346,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.846556,
+          "start_s": 0.846817,
+          "end_s": 2.376909,
+          "queue_s": 0.000261,
+          "response": {
+            "ok": true,
+            "request_s": 1.53,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 263.019,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.846556,
+          "start_s": 2.377034,
+          "end_s": 3.233886,
+          "queue_s": 1.530478,
+          "response": {
+            "ok": true,
+            "request_s": 0.857,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 260.777,
+            "predicted_n": 61,
+            "cached_field": 1266,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.846556,
+          "start_s": 3.846726,
+          "end_s": 4.4886,
+          "queue_s": 0.00017,
+          "response": {
+            "ok": true,
+            "request_s": 0.642,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 28.642,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.4886,
+      "phase_makespan_s": 3.642044,
+      "throughput_completed_tasks_s": 0.66836,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.4886,
+      "a2_request_s": 0.642,
+      "a2_queue_s": 0.00017,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 28.642,
+      "b_completion_from_arrival_s": 1.530353,
+      "b_queue_s": 0.000261,
+      "c_completion_from_arrival_s": 2.38733,
+      "c_queue_s": 1.530478
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:21.133793+00:00",
+      "mix": "short_short",
+      "policy": "reuse",
+      "wait_s": 3.0,
+      "repeat": 1,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.851354,
+      "a2_eligible_s": 3.851354,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1266
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.851354,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.851,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 252.519,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.851354,
+          "start_s": 0.851618,
+          "end_s": 2.98302,
+          "queue_s": 0.000264,
+          "response": {
+            "ok": true,
+            "request_s": 2.131,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 241.676,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.851354,
+          "start_s": 0.852081,
+          "end_s": 3.000234,
+          "queue_s": 0.000727,
+          "response": {
+            "ok": true,
+            "request_s": 2.148,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 271.95,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.851354,
+          "start_s": 3.851484,
+          "end_s": 4.74481,
+          "queue_s": 0.00013,
+          "response": {
+            "ok": true,
+            "request_s": 0.893,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 267.056,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.74481,
+      "phase_makespan_s": 3.893456,
+      "throughput_completed_tasks_s": 0.63227,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.74481,
+      "a2_request_s": 0.893,
+      "a2_queue_s": 0.00013,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 267.056,
+      "b_completion_from_arrival_s": 2.131666,
+      "b_queue_s": 0.000264,
+      "c_completion_from_arrival_s": 2.14888,
+      "c_queue_s": 0.000727
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:30.893112+00:00",
+      "mix": "short_short",
+      "policy": "reuse",
+      "wait_s": 8.0,
+      "repeat": 1,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.864667,
+      "a2_eligible_s": 8.864667,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.864667,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.865,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 274.309,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.864667,
+          "start_s": 0.865371,
+          "end_s": 3.03786,
+          "queue_s": 0.000704,
+          "response": {
+            "ok": true,
+            "request_s": 2.172,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 273.438,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.864667,
+          "start_s": 0.864964,
+          "end_s": 3.052993,
+          "queue_s": 0.000297,
+          "response": {
+            "ok": true,
+            "request_s": 2.188,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 273.065,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.864667,
+          "start_s": 8.864873,
+          "end_s": 9.756796,
+          "queue_s": 0.000206,
+          "response": {
+            "ok": true,
+            "request_s": 0.892,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 268.063,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.756796,
+      "phase_makespan_s": 8.892129,
+      "throughput_completed_tasks_s": 0.307478,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.756796,
+      "a2_request_s": 0.892,
+      "a2_queue_s": 0.000206,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 268.063,
+      "b_completion_from_arrival_s": 2.188326,
+      "b_queue_s": 0.000297,
+      "c_completion_from_arrival_s": 2.173193,
+      "c_queue_s": 0.000704
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:40.425430+00:00",
+      "mix": "short_short",
+      "policy": "preserve",
+      "wait_s": 8.0,
+      "repeat": 1,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.856634,
+      "a2_eligible_s": 8.856634,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 3e-06,
+          "end_s": 0.856634,
+          "queue_s": 3e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.857,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 263.173,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.856634,
+          "start_s": 0.857048,
+          "end_s": 2.397899,
+          "queue_s": 0.000414,
+          "response": {
+            "ok": true,
+            "request_s": 1.541,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 267.026,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.856634,
+          "start_s": 2.397982,
+          "end_s": 3.2608,
+          "queue_s": 1.541348,
+          "response": {
+            "ok": true,
+            "request_s": 0.863,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 260.155,
+            "predicted_n": 61,
+            "cached_field": 1266,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.856634,
+          "start_s": 8.856802,
+          "end_s": 9.529495,
+          "queue_s": 0.000168,
+          "response": {
+            "ok": true,
+            "request_s": 0.673,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 28.465,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.529495,
+      "phase_makespan_s": 8.672861,
+      "throughput_completed_tasks_s": 0.314812,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.529495,
+      "a2_request_s": 0.673,
+      "a2_queue_s": 0.000168,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 28.465,
+      "b_completion_from_arrival_s": 1.541265,
+      "b_queue_s": 0.000414,
+      "c_completion_from_arrival_s": 2.404166,
+      "c_queue_s": 1.541348
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:44.917153+00:00",
+      "mix": "short_long",
+      "policy": "preserve",
+      "wait_s": 0.0,
+      "repeat": 1,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.858855,
+      "a2_eligible_s": 0.858855,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1266
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.858855,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.859,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 247.511,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.858855,
+          "start_s": 0.860087,
+          "end_s": 1.961239,
+          "queue_s": 0.001232,
+          "response": {
+            "ok": true,
+            "request_s": 1.101,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 27.593,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.858855,
+          "start_s": 0.8591,
+          "end_s": 2.593425,
+          "queue_s": 0.000245,
+          "response": {
+            "ok": true,
+            "request_s": 1.734,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 254.809,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.858855,
+          "start_s": 2.593514,
+          "end_s": 4.489452,
+          "queue_s": 1.734659,
+          "response": {
+            "ok": true,
+            "request_s": 1.896,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 569.91,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.489452,
+      "phase_makespan_s": 3.630597,
+      "throughput_completed_tasks_s": 0.668233,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 1.961239,
+      "a2_request_s": 1.101,
+      "a2_queue_s": 0.001232,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 27.593,
+      "b_completion_from_arrival_s": 1.73457,
+      "b_queue_s": 0.000245,
+      "c_completion_from_arrival_s": 3.630597,
+      "c_queue_s": 1.734659
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:49.217828+00:00",
+      "mix": "short_long",
+      "policy": "reuse",
+      "wait_s": 0.0,
+      "repeat": 1,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.854646,
+      "a2_eligible_s": 0.854646,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.854646,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.855,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 254.168,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.854646,
+          "start_s": 0.854953,
+          "end_s": 3.329102,
+          "queue_s": 0.000307,
+          "response": {
+            "ok": true,
+            "request_s": 2.474,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 249.062,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.854646,
+          "start_s": 0.855575,
+          "end_s": 3.640055,
+          "queue_s": 0.000929,
+          "response": {
+            "ok": true,
+            "request_s": 2.784,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 572.45,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.854646,
+          "start_s": 3.329317,
+          "end_s": 4.297812,
+          "queue_s": 2.474671,
+          "response": {
+            "ok": true,
+            "request_s": 0.968,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 294.309,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.297812,
+      "phase_makespan_s": 3.443166,
+      "throughput_completed_tasks_s": 0.69803,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.297812,
+      "a2_request_s": 0.968,
+      "a2_queue_s": 2.474671,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 294.309,
+      "b_completion_from_arrival_s": 2.474456,
+      "b_queue_s": 0.000307,
+      "c_completion_from_arrival_s": 2.785409,
+      "c_queue_s": 0.000929
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:54.017604+00:00",
+      "mix": "short_long",
+      "policy": "reuse",
+      "wait_s": 3.0,
+      "repeat": 1,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.857729,
+      "a2_eligible_s": 3.857729,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.857729,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.858,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 252.992,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.857729,
+          "start_s": 0.858024,
+          "end_s": 3.328187,
+          "queue_s": 0.000295,
+          "response": {
+            "ok": true,
+            "request_s": 2.47,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 249.508,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.857729,
+          "start_s": 0.858587,
+          "end_s": 3.362837,
+          "queue_s": 0.000858,
+          "response": {
+            "ok": true,
+            "request_s": 2.504,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 575.612,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.857729,
+          "start_s": 3.857932,
+          "end_s": 4.797272,
+          "queue_s": 0.000203,
+          "response": {
+            "ok": true,
+            "request_s": 0.939,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 282.43,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.797272,
+      "phase_makespan_s": 3.939543,
+      "throughput_completed_tasks_s": 0.625355,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.797272,
+      "a2_request_s": 0.939,
+      "a2_queue_s": 0.000203,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 282.43,
+      "b_completion_from_arrival_s": 2.470458,
+      "b_queue_s": 0.000295,
+      "c_completion_from_arrival_s": 2.505108,
+      "c_queue_s": 0.000858
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:02:58.771008+00:00",
+      "mix": "short_long",
+      "policy": "preserve",
+      "wait_s": 3.0,
+      "repeat": 1,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.920139,
+      "a2_eligible_s": 3.920139,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.920139,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.92,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 269.065,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.920139,
+          "start_s": 0.920461,
+          "end_s": 2.502079,
+          "queue_s": 0.000322,
+          "response": {
+            "ok": true,
+            "request_s": 1.582,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 291.892,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.920139,
+          "start_s": 2.502181,
+          "end_s": 4.551096,
+          "queue_s": 1.582042,
+          "response": {
+            "ok": true,
+            "request_s": 2.049,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 568.018,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.920139,
+          "start_s": 3.920288,
+          "end_s": 4.75046,
+          "queue_s": 0.000149,
+          "response": {
+            "ok": true,
+            "request_s": 0.83,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 29.394,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.75046,
+      "phase_makespan_s": 3.830321,
+      "throughput_completed_tasks_s": 0.631518,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.75046,
+      "a2_request_s": 0.83,
+      "a2_queue_s": 0.000149,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 29.394,
+      "b_completion_from_arrival_s": 1.58194,
+      "b_queue_s": 0.000322,
+      "c_completion_from_arrival_s": 3.630957,
+      "c_queue_s": 1.582042
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:03:08.378225+00:00",
+      "mix": "short_long",
+      "policy": "preserve",
+      "wait_s": 8.0,
+      "repeat": 1,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.88588,
+      "a2_eligible_s": 8.88588,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.88588,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.886,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 255.392,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.88588,
+          "start_s": 0.886333,
+          "end_s": 2.468806,
+          "queue_s": 0.000453,
+          "response": {
+            "ok": true,
+            "request_s": 1.582,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 267.273,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.88588,
+          "start_s": 2.468944,
+          "end_s": 4.376074,
+          "queue_s": 1.583064,
+          "response": {
+            "ok": true,
+            "request_s": 1.907,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 579.912,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.88588,
+          "start_s": 8.885994,
+          "end_s": 9.604363,
+          "queue_s": 0.000114,
+          "response": {
+            "ok": true,
+            "request_s": 0.718,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 28.744,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.604363,
+      "phase_makespan_s": 8.718483,
+      "throughput_completed_tasks_s": 0.312358,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.604363,
+      "a2_request_s": 0.718,
+      "a2_queue_s": 0.000114,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 28.744,
+      "b_completion_from_arrival_s": 1.582926,
+      "b_queue_s": 0.000453,
+      "c_completion_from_arrival_s": 3.490194,
+      "c_queue_s": 1.583064
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:03:18.200368+00:00",
+      "mix": "short_long",
+      "policy": "reuse",
+      "wait_s": 8.0,
+      "repeat": 1,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.86369,
+      "a2_eligible_s": 8.86369,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.86369,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.864,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 248.433,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.86369,
+          "start_s": 0.864077,
+          "end_s": 3.344029,
+          "queue_s": 0.000387,
+          "response": {
+            "ok": true,
+            "request_s": 2.48,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 248.978,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.86369,
+          "start_s": 0.864692,
+          "end_s": 3.373212,
+          "queue_s": 0.001002,
+          "response": {
+            "ok": true,
+            "request_s": 2.508,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 593.225,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.86369,
+          "start_s": 8.863857,
+          "end_s": 9.819152,
+          "queue_s": 0.000167,
+          "response": {
+            "ok": true,
+            "request_s": 0.955,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 290.191,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.819152,
+      "phase_makespan_s": 8.955462,
+      "throughput_completed_tasks_s": 0.305525,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.819152,
+      "a2_request_s": 0.955,
+      "a2_queue_s": 0.000167,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 290.191,
+      "b_completion_from_arrival_s": 2.480339,
+      "b_queue_s": 0.000387,
+      "c_completion_from_arrival_s": 2.509522,
+      "c_queue_s": 0.001002
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:03:22.468235+00:00",
+      "mix": "short_short",
+      "policy": "preserve",
+      "wait_s": 0.0,
+      "repeat": 2,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.886712,
+      "a2_eligible_s": 0.886712,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.886712,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.887,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 277.059,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.886712,
+          "start_s": 0.887856,
+          "end_s": 2.034404,
+          "queue_s": 0.001144,
+          "response": {
+            "ok": true,
+            "request_s": 1.147,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 27.631,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.886712,
+          "start_s": 0.886989,
+          "end_s": 2.693049,
+          "queue_s": 0.000277,
+          "response": {
+            "ok": true,
+            "request_s": 1.806,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 285.642,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.886712,
+          "start_s": 2.693182,
+          "end_s": 4.265037,
+          "queue_s": 1.80647,
+          "response": {
+            "ok": true,
+            "request_s": 1.572,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 274.373,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.265037,
+      "phase_makespan_s": 3.378325,
+      "throughput_completed_tasks_s": 0.703394,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 2.034404,
+      "a2_request_s": 1.147,
+      "a2_queue_s": 0.001144,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 27.631,
+      "b_completion_from_arrival_s": 1.806337,
+      "b_queue_s": 0.000277,
+      "c_completion_from_arrival_s": 3.378325,
+      "c_queue_s": 1.80647
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:03:26.455824+00:00",
+      "mix": "short_short",
+      "policy": "reuse",
+      "wait_s": 0.0,
+      "repeat": 2,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.883409,
+      "a2_eligible_s": 0.883409,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.883409,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.883,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 260.223,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.883409,
+          "start_s": 0.88379,
+          "end_s": 3.039376,
+          "queue_s": 0.000381,
+          "response": {
+            "ok": true,
+            "request_s": 2.156,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 425.447,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.883409,
+          "start_s": 0.884434,
+          "end_s": 3.055844,
+          "queue_s": 0.001025,
+          "response": {
+            "ok": true,
+            "request_s": 2.171,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 510.533,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.883409,
+          "start_s": 3.039492,
+          "end_s": 3.984727,
+          "queue_s": 2.156083,
+          "response": {
+            "ok": true,
+            "request_s": 0.945,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 282.905,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 3.984727,
+      "phase_makespan_s": 3.101318,
+      "throughput_completed_tasks_s": 0.752875,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 3.984727,
+      "a2_request_s": 0.945,
+      "a2_queue_s": 2.156083,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 282.905,
+      "b_completion_from_arrival_s": 2.155967,
+      "b_queue_s": 0.000381,
+      "c_completion_from_arrival_s": 2.172435,
+      "c_queue_s": 0.001025
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:03:31.273948+00:00",
+      "mix": "short_short",
+      "policy": "reuse",
+      "wait_s": 3.0,
+      "repeat": 2,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.88056,
+      "a2_eligible_s": 3.88056,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.88056,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.881,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 260.29,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.88056,
+          "start_s": 0.880893,
+          "end_s": 3.069997,
+          "queue_s": 0.000333,
+          "response": {
+            "ok": true,
+            "request_s": 2.189,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 258.629,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.88056,
+          "start_s": 0.881476,
+          "end_s": 3.086729,
+          "queue_s": 0.000916,
+          "response": {
+            "ok": true,
+            "request_s": 2.205,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 274.53,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.88056,
+          "start_s": 3.880754,
+          "end_s": 4.815257,
+          "queue_s": 0.000194,
+          "response": {
+            "ok": true,
+            "request_s": 0.934,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 277.932,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.815257,
+      "phase_makespan_s": 3.934697,
+      "throughput_completed_tasks_s": 0.62302,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.815257,
+      "a2_request_s": 0.934,
+      "a2_queue_s": 0.000194,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 277.932,
+      "b_completion_from_arrival_s": 2.189437,
+      "b_queue_s": 0.000333,
+      "c_completion_from_arrival_s": 2.206169,
+      "c_queue_s": 0.000916
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:03:35.836464+00:00",
+      "mix": "short_short",
+      "policy": "preserve",
+      "wait_s": 3.0,
+      "repeat": 2,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.892739,
+      "a2_eligible_s": 3.892739,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 3e-06,
+          "end_s": 0.892739,
+          "queue_s": 3e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.893,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 272.773,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.892739,
+          "start_s": 0.893077,
+          "end_s": 2.497442,
+          "queue_s": 0.000338,
+          "response": {
+            "ok": true,
+            "request_s": 1.604,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 289.323,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.892739,
+          "start_s": 2.497611,
+          "end_s": 3.384729,
+          "queue_s": 1.604872,
+          "response": {
+            "ok": true,
+            "request_s": 0.887,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 262.329,
+            "predicted_n": 61,
+            "cached_field": 1266,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.892739,
+          "start_s": 3.892867,
+          "end_s": 4.558952,
+          "queue_s": 0.000128,
+          "response": {
+            "ok": true,
+            "request_s": 0.666,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 28.679,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.558952,
+      "phase_makespan_s": 3.666213,
+      "throughput_completed_tasks_s": 0.658046,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.558952,
+      "a2_request_s": 0.666,
+      "a2_queue_s": 0.000128,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 28.679,
+      "b_completion_from_arrival_s": 1.604703,
+      "b_queue_s": 0.000338,
+      "c_completion_from_arrival_s": 2.49199,
+      "c_queue_s": 1.604872
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:03:45.429239+00:00",
+      "mix": "short_short",
+      "policy": "preserve",
+      "wait_s": 8.0,
+      "repeat": 2,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.905855,
+      "a2_eligible_s": 8.905855,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1266
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 3e-06,
+          "end_s": 0.905855,
+          "queue_s": 3e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.906,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 275.111,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.905855,
+          "start_s": 0.906222,
+          "end_s": 2.500968,
+          "queue_s": 0.000367,
+          "response": {
+            "ok": true,
+            "request_s": 1.595,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 269.698,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.905855,
+          "start_s": 2.501099,
+          "end_s": 3.385771,
+          "queue_s": 1.595244,
+          "response": {
+            "ok": true,
+            "request_s": 0.885,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 268.008,
+            "predicted_n": 61,
+            "cached_field": 1266,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.905855,
+          "start_s": 8.906046,
+          "end_s": 9.589732,
+          "queue_s": 0.000191,
+          "response": {
+            "ok": true,
+            "request_s": 0.684,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 29.471,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.589732,
+      "phase_makespan_s": 8.683877,
+      "throughput_completed_tasks_s": 0.312835,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.589732,
+      "a2_request_s": 0.684,
+      "a2_queue_s": 0.000191,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 29.471,
+      "b_completion_from_arrival_s": 1.595113,
+      "b_queue_s": 0.000367,
+      "c_completion_from_arrival_s": 2.479916,
+      "c_queue_s": 1.595244
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:03:55.230661+00:00",
+      "mix": "short_short",
+      "policy": "reuse",
+      "wait_s": 8.0,
+      "repeat": 2,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.884448,
+      "a2_eligible_s": 8.884448,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1266
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.884448,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.884,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 257.409,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.884448,
+          "start_s": 0.884797,
+          "end_s": 3.048306,
+          "queue_s": 0.000349,
+          "response": {
+            "ok": true,
+            "request_s": 2.163,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 418.525,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.884448,
+          "start_s": 0.88533,
+          "end_s": 3.064311,
+          "queue_s": 0.000882,
+          "response": {
+            "ok": true,
+            "request_s": 2.179,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 508.081,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.884448,
+          "start_s": 8.884586,
+          "end_s": 9.798273,
+          "queue_s": 0.000138,
+          "response": {
+            "ok": true,
+            "request_s": 0.914,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 276.471,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.798273,
+      "phase_makespan_s": 8.913825,
+      "throughput_completed_tasks_s": 0.306176,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.798273,
+      "a2_request_s": 0.914,
+      "a2_queue_s": 0.000138,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 276.471,
+      "b_completion_from_arrival_s": 2.163858,
+      "b_queue_s": 0.000349,
+      "c_completion_from_arrival_s": 2.179863,
+      "c_queue_s": 0.000882
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:03:59.614268+00:00",
+      "mix": "short_long",
+      "policy": "reuse",
+      "wait_s": 0.0,
+      "repeat": 2,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.886916,
+      "a2_eligible_s": 0.886916,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.886916,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.887,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 272.319,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.886916,
+          "start_s": 0.887271,
+          "end_s": 3.404802,
+          "queue_s": 0.000355,
+          "response": {
+            "ok": true,
+            "request_s": 2.518,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 269.87,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.886916,
+          "start_s": 0.887965,
+          "end_s": 3.71285,
+          "queue_s": 0.001049,
+          "response": {
+            "ok": true,
+            "request_s": 2.825,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 577.662,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.886916,
+          "start_s": 3.404997,
+          "end_s": 4.380972,
+          "queue_s": 2.518081,
+          "response": {
+            "ok": true,
+            "request_s": 0.976,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 292.717,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.380972,
+      "phase_makespan_s": 3.494056,
+      "throughput_completed_tasks_s": 0.68478,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.380972,
+      "a2_request_s": 0.976,
+      "a2_queue_s": 2.518081,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 292.717,
+      "b_completion_from_arrival_s": 2.517886,
+      "b_queue_s": 0.000355,
+      "c_completion_from_arrival_s": 2.825934,
+      "c_queue_s": 0.001049
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:04:04.218222+00:00",
+      "mix": "short_long",
+      "policy": "preserve",
+      "wait_s": 0.0,
+      "repeat": 2,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.886904,
+      "a2_eligible_s": 0.886904,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.886904,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.887,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 256.706,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.886904,
+          "start_s": 0.888022,
+          "end_s": 2.026584,
+          "queue_s": 0.001118,
+          "response": {
+            "ok": true,
+            "request_s": 1.139,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 38.233,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.886904,
+          "start_s": 0.88718,
+          "end_s": 2.68337,
+          "queue_s": 0.000276,
+          "response": {
+            "ok": true,
+            "request_s": 1.796,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 272.712,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.886904,
+          "start_s": 2.683531,
+          "end_s": 4.60184,
+          "queue_s": 1.796627,
+          "response": {
+            "ok": true,
+            "request_s": 1.918,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 591.212,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.60184,
+      "phase_makespan_s": 3.714936,
+      "throughput_completed_tasks_s": 0.651913,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 2.026584,
+      "a2_request_s": 1.139,
+      "a2_queue_s": 0.001118,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 38.233,
+      "b_completion_from_arrival_s": 1.796466,
+      "b_queue_s": 0.000276,
+      "c_completion_from_arrival_s": 3.714936,
+      "c_queue_s": 1.796627
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:04:08.923770+00:00",
+      "mix": "short_long",
+      "policy": "preserve",
+      "wait_s": 3.0,
+      "repeat": 2,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.878351,
+      "a2_eligible_s": 3.878351,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.878351,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.878,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 259.188,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.878351,
+          "start_s": 0.878675,
+          "end_s": 2.456627,
+          "queue_s": 0.000324,
+          "response": {
+            "ok": true,
+            "request_s": 1.578,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 271.5,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.878351,
+          "start_s": 2.456749,
+          "end_s": 4.509338,
+          "queue_s": 1.578398,
+          "response": {
+            "ok": true,
+            "request_s": 2.053,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 580.941,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.878351,
+          "start_s": 3.878526,
+          "end_s": 4.702605,
+          "queue_s": 0.000175,
+          "response": {
+            "ok": true,
+            "request_s": 0.824,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 30.031,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.702605,
+      "phase_makespan_s": 3.824254,
+      "throughput_completed_tasks_s": 0.637944,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.702605,
+      "a2_request_s": 0.824,
+      "a2_queue_s": 0.000175,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 30.031,
+      "b_completion_from_arrival_s": 1.578276,
+      "b_queue_s": 0.000324,
+      "c_completion_from_arrival_s": 3.630987,
+      "c_queue_s": 1.578398
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:04:13.729479+00:00",
+      "mix": "short_long",
+      "policy": "reuse",
+      "wait_s": 3.0,
+      "repeat": 2,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.864222,
+      "a2_eligible_s": 3.864222,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 3e-06,
+          "end_s": 0.864222,
+          "queue_s": 3e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.864,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 255.975,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.864222,
+          "start_s": 0.864523,
+          "end_s": 3.335616,
+          "queue_s": 0.000301,
+          "response": {
+            "ok": true,
+            "request_s": 2.471,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 253.275,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.864222,
+          "start_s": 0.864983,
+          "end_s": 3.365467,
+          "queue_s": 0.000761,
+          "response": {
+            "ok": true,
+            "request_s": 2.5,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 577.657,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.864222,
+          "start_s": 3.864394,
+          "end_s": 4.802819,
+          "queue_s": 0.000172,
+          "response": {
+            "ok": true,
+            "request_s": 0.938,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 283.91,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.802819,
+      "phase_makespan_s": 3.938597,
+      "throughput_completed_tasks_s": 0.624633,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.802819,
+      "a2_request_s": 0.938,
+      "a2_queue_s": 0.000172,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 283.91,
+      "b_completion_from_arrival_s": 2.471394,
+      "b_queue_s": 0.000301,
+      "c_completion_from_arrival_s": 2.501245,
+      "c_queue_s": 0.000761
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:04:23.573664+00:00",
+      "mix": "short_long",
+      "policy": "reuse",
+      "wait_s": 8.0,
+      "repeat": 2,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.876678,
+      "a2_eligible_s": 8.876678,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 3e-06,
+          "end_s": 0.876678,
+          "queue_s": 3e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.877,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 272.839,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.876678,
+          "start_s": 0.877139,
+          "end_s": 3.369781,
+          "queue_s": 0.000461,
+          "response": {
+            "ok": true,
+            "request_s": 2.493,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 264.988,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.876678,
+          "start_s": 0.877452,
+          "end_s": 3.399017,
+          "queue_s": 0.000774,
+          "response": {
+            "ok": true,
+            "request_s": 2.522,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 575.401,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.876678,
+          "start_s": 8.87683,
+          "end_s": 9.84123,
+          "queue_s": 0.000152,
+          "response": {
+            "ok": true,
+            "request_s": 0.964,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 290.819,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.84123,
+      "phase_makespan_s": 8.964552,
+      "throughput_completed_tasks_s": 0.30484,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.84123,
+      "a2_request_s": 0.964,
+      "a2_queue_s": 0.000152,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 290.819,
+      "b_completion_from_arrival_s": 2.493103,
+      "b_queue_s": 0.000461,
+      "c_completion_from_arrival_s": 2.522339,
+      "c_queue_s": 0.000774
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:04:33.152826+00:00",
+      "mix": "short_long",
+      "policy": "preserve",
+      "wait_s": 8.0,
+      "repeat": 2,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.871429,
+      "a2_eligible_s": 8.871429,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.871429,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.871,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 268.178,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.871429,
+          "start_s": 0.871793,
+          "end_s": 2.43503,
+          "queue_s": 0.000364,
+          "response": {
+            "ok": true,
+            "request_s": 1.563,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 283.143,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.871429,
+          "start_s": 2.435119,
+          "end_s": 4.312849,
+          "queue_s": 1.56369,
+          "response": {
+            "ok": true,
+            "request_s": 1.878,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 562.093,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.871429,
+          "start_s": 8.871564,
+          "end_s": 9.576594,
+          "queue_s": 0.000135,
+          "response": {
+            "ok": true,
+            "request_s": 0.705,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 31.981,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.576594,
+      "phase_makespan_s": 8.705165,
+      "throughput_completed_tasks_s": 0.313264,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.576594,
+      "a2_request_s": 0.705,
+      "a2_queue_s": 0.000135,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 31.981,
+      "b_completion_from_arrival_s": 1.563601,
+      "b_queue_s": 0.000364,
+      "c_completion_from_arrival_s": 3.44142,
+      "c_queue_s": 1.56369
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:04:37.092540+00:00",
+      "mix": "short_short",
+      "policy": "reuse",
+      "wait_s": 0.0,
+      "repeat": 3,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.865474,
+      "a2_eligible_s": 0.865474,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 3e-06,
+          "end_s": 0.865474,
+          "queue_s": 3e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.865,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 260.474,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.865474,
+          "start_s": 0.865741,
+          "end_s": 3.008163,
+          "queue_s": 0.000267,
+          "response": {
+            "ok": true,
+            "request_s": 2.142,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 248.178,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.865474,
+          "start_s": 0.866242,
+          "end_s": 3.025268,
+          "queue_s": 0.000768,
+          "response": {
+            "ok": true,
+            "request_s": 2.159,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 276.469,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.865474,
+          "start_s": 3.008274,
+          "end_s": 3.936818,
+          "queue_s": 2.1428,
+          "response": {
+            "ok": true,
+            "request_s": 0.929,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 280.073,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 3.936818,
+      "phase_makespan_s": 3.071344,
+      "throughput_completed_tasks_s": 0.762037,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 3.936818,
+      "a2_request_s": 0.929,
+      "a2_queue_s": 2.1428,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 280.073,
+      "b_completion_from_arrival_s": 2.142689,
+      "b_queue_s": 0.000267,
+      "c_completion_from_arrival_s": 2.159794,
+      "c_queue_s": 0.000768
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:04:41.270480+00:00",
+      "mix": "short_short",
+      "policy": "preserve",
+      "wait_s": 0.0,
+      "repeat": 3,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.869639,
+      "a2_eligible_s": 0.869639,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.869639,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.87,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 255.367,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.869639,
+          "start_s": 0.870816,
+          "end_s": 1.993968,
+          "queue_s": 0.001177,
+          "response": {
+            "ok": true,
+            "request_s": 1.123,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 30.391,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.869639,
+          "start_s": 0.869977,
+          "end_s": 2.635074,
+          "queue_s": 0.000338,
+          "response": {
+            "ok": true,
+            "request_s": 1.765,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 267.157,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.869639,
+          "start_s": 2.635257,
+          "end_s": 4.175175,
+          "queue_s": 1.765618,
+          "response": {
+            "ok": true,
+            "request_s": 1.54,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 265.465,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.175175,
+      "phase_makespan_s": 3.305536,
+      "throughput_completed_tasks_s": 0.718533,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 1.993968,
+      "a2_request_s": 1.123,
+      "a2_queue_s": 0.001177,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 30.391,
+      "b_completion_from_arrival_s": 1.765435,
+      "b_queue_s": 0.000338,
+      "c_completion_from_arrival_s": 3.305536,
+      "c_queue_s": 1.765618
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:04:45.793559+00:00",
+      "mix": "short_short",
+      "policy": "preserve",
+      "wait_s": 3.0,
+      "repeat": 3,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.863874,
+      "a2_eligible_s": 3.863874,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.863874,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.864,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 254.867,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.863874,
+          "start_s": 0.864116,
+          "end_s": 2.419881,
+          "queue_s": 0.000242,
+          "response": {
+            "ok": true,
+            "request_s": 1.556,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 265.499,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.863874,
+          "start_s": 2.420125,
+          "end_s": 3.290593,
+          "queue_s": 1.556251,
+          "response": {
+            "ok": true,
+            "request_s": 0.87,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 263.166,
+            "predicted_n": 61,
+            "cached_field": 1266,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.863874,
+          "start_s": 3.864028,
+          "end_s": 4.520363,
+          "queue_s": 0.000154,
+          "response": {
+            "ok": true,
+            "request_s": 0.656,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 27.504,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.520363,
+      "phase_makespan_s": 3.656489,
+      "throughput_completed_tasks_s": 0.663664,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.520363,
+      "a2_request_s": 0.656,
+      "a2_queue_s": 0.000154,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 27.504,
+      "b_completion_from_arrival_s": 1.556007,
+      "b_queue_s": 0.000242,
+      "c_completion_from_arrival_s": 2.426719,
+      "c_queue_s": 1.556251
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:04:50.574044+00:00",
+      "mix": "short_short",
+      "policy": "reuse",
+      "wait_s": 3.0,
+      "repeat": 3,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.875194,
+      "a2_eligible_s": 3.875194,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1266
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.875194,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.875,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 257.066,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.875194,
+          "start_s": 0.875506,
+          "end_s": 3.019852,
+          "queue_s": 0.000312,
+          "response": {
+            "ok": true,
+            "request_s": 2.144,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 413.408,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.875194,
+          "start_s": 0.875988,
+          "end_s": 3.03574,
+          "queue_s": 0.000794,
+          "response": {
+            "ok": true,
+            "request_s": 2.16,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 503.058,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.875194,
+          "start_s": 3.875328,
+          "end_s": 4.777683,
+          "queue_s": 0.000134,
+          "response": {
+            "ok": true,
+            "request_s": 0.902,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 267.937,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.777683,
+      "phase_makespan_s": 3.902489,
+      "throughput_completed_tasks_s": 0.627919,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.777683,
+      "a2_request_s": 0.902,
+      "a2_queue_s": 0.000134,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 267.937,
+      "b_completion_from_arrival_s": 2.144658,
+      "b_queue_s": 0.000312,
+      "c_completion_from_arrival_s": 2.160546,
+      "c_queue_s": 0.000794
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:05:00.347851+00:00",
+      "mix": "short_short",
+      "policy": "reuse",
+      "wait_s": 8.0,
+      "repeat": 3,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.870621,
+      "a2_eligible_s": 8.870621,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.870621,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.871,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 267.3,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.870621,
+          "start_s": 0.871669,
+          "end_s": 3.055872,
+          "queue_s": 0.001048,
+          "response": {
+            "ok": true,
+            "request_s": 2.184,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 273.204,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.870621,
+          "start_s": 0.870996,
+          "end_s": 3.070214,
+          "queue_s": 0.000375,
+          "response": {
+            "ok": true,
+            "request_s": 2.199,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 275.229,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.870621,
+          "start_s": 8.871013,
+          "end_s": 9.771052,
+          "queue_s": 0.000392,
+          "response": {
+            "ok": true,
+            "request_s": 0.9,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 276.097,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.771052,
+      "phase_makespan_s": 8.900431,
+      "throughput_completed_tasks_s": 0.307029,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.771052,
+      "a2_request_s": 0.9,
+      "a2_queue_s": 0.000392,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 276.097,
+      "b_completion_from_arrival_s": 2.199593,
+      "b_queue_s": 0.000375,
+      "c_completion_from_arrival_s": 2.185251,
+      "c_queue_s": 0.001048
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:05:09.875108+00:00",
+      "mix": "short_short",
+      "policy": "preserve",
+      "wait_s": 8.0,
+      "repeat": 3,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.871907,
+      "a2_eligible_s": 8.871907,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1333
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 3e-06,
+          "end_s": 0.871907,
+          "queue_s": 3e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.872,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 271.777,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.871907,
+          "start_s": 0.872158,
+          "end_s": 2.443945,
+          "queue_s": 0.000251,
+          "response": {
+            "ok": true,
+            "request_s": 1.572,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 274.163,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.871907,
+          "start_s": 2.444045,
+          "end_s": 3.303609,
+          "queue_s": 1.572138,
+          "response": {
+            "ok": true,
+            "request_s": 0.86,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 260.009,
+            "predicted_n": 61,
+            "cached_field": 1266,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.871907,
+          "start_s": 8.87203,
+          "end_s": 9.52469,
+          "queue_s": 0.000123,
+          "response": {
+            "ok": true,
+            "request_s": 0.653,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 29.098,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.52469,
+      "phase_makespan_s": 8.652783,
+      "throughput_completed_tasks_s": 0.314971,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.52469,
+      "a2_request_s": 0.653,
+      "a2_queue_s": 0.000123,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 29.098,
+      "b_completion_from_arrival_s": 1.572038,
+      "b_queue_s": 0.000251,
+      "c_completion_from_arrival_s": 2.431702,
+      "c_queue_s": 1.572138
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:05:14.414066+00:00",
+      "mix": "short_long",
+      "policy": "preserve",
+      "wait_s": 0.0,
+      "repeat": 3,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.870737,
+      "a2_eligible_s": 0.870737,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 1266
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.870737,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.871,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 252.087,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.870737,
+          "start_s": 0.871912,
+          "end_s": 1.997234,
+          "queue_s": 0.001175,
+          "response": {
+            "ok": true,
+            "request_s": 1.125,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 28.918,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.870737,
+          "start_s": 0.871043,
+          "end_s": 2.640711,
+          "queue_s": 0.000306,
+          "response": {
+            "ok": true,
+            "request_s": 1.77,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 261.167,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.870737,
+          "start_s": 2.640829,
+          "end_s": 4.536586,
+          "queue_s": 1.770092,
+          "response": {
+            "ok": true,
+            "request_s": 1.896,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 578.209,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.536586,
+      "phase_makespan_s": 3.665849,
+      "throughput_completed_tasks_s": 0.66129,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 1.997234,
+      "a2_request_s": 1.125,
+      "a2_queue_s": 0.001175,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 28.918,
+      "b_completion_from_arrival_s": 1.769974,
+      "b_queue_s": 0.000306,
+      "c_completion_from_arrival_s": 3.665849,
+      "c_queue_s": 1.770092
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:05:18.709586+00:00",
+      "mix": "short_long",
+      "policy": "reuse",
+      "wait_s": 0.0,
+      "repeat": 3,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.858946,
+      "a2_eligible_s": 0.858946,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.858946,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.859,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 255.429,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.858946,
+          "start_s": 0.859273,
+          "end_s": 3.318091,
+          "queue_s": 0.000327,
+          "response": {
+            "ok": true,
+            "request_s": 2.459,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 253.683,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.858946,
+          "start_s": 0.859787,
+          "end_s": 3.628979,
+          "queue_s": 0.000841,
+          "response": {
+            "ok": true,
+            "request_s": 2.769,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 574.959,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 0.858946,
+          "start_s": 3.318291,
+          "end_s": 4.292718,
+          "queue_s": 2.459345,
+          "response": {
+            "ok": true,
+            "request_s": 0.974,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 293.536,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.292718,
+      "phase_makespan_s": 3.433772,
+      "throughput_completed_tasks_s": 0.698858,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.292718,
+      "a2_request_s": 0.974,
+      "a2_queue_s": 2.459345,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 293.536,
+      "b_completion_from_arrival_s": 2.459145,
+      "b_queue_s": 0.000327,
+      "c_completion_from_arrival_s": 2.770033,
+      "c_queue_s": 0.000841
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:05:23.527900+00:00",
+      "mix": "short_long",
+      "policy": "reuse",
+      "wait_s": 3.0,
+      "repeat": 3,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.867371,
+      "a2_eligible_s": 3.867371,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.867371,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.867,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 256.012,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.867371,
+          "start_s": 0.867695,
+          "end_s": 3.329086,
+          "queue_s": 0.000324,
+          "response": {
+            "ok": true,
+            "request_s": 2.461,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 253.339,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.867371,
+          "start_s": 0.868148,
+          "end_s": 3.359002,
+          "queue_s": 0.000777,
+          "response": {
+            "ok": true,
+            "request_s": 2.491,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 580.365,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.867371,
+          "start_s": 3.867915,
+          "end_s": 4.815026,
+          "queue_s": 0.000544,
+          "response": {
+            "ok": true,
+            "request_s": 0.947,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 284.06,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.815026,
+      "phase_makespan_s": 3.947655,
+      "throughput_completed_tasks_s": 0.62305,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.815026,
+      "a2_request_s": 0.947,
+      "a2_queue_s": 0.000544,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 284.06,
+      "b_completion_from_arrival_s": 2.461715,
+      "b_queue_s": 0.000324,
+      "c_completion_from_arrival_s": 2.491631,
+      "c_queue_s": 0.000777
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:05:28.201660+00:00",
+      "mix": "short_long",
+      "policy": "preserve",
+      "wait_s": 3.0,
+      "repeat": 3,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.865363,
+      "a2_eligible_s": 3.865363,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 2e-06,
+          "end_s": 0.865363,
+          "queue_s": 2e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.865,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 259.661,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.865363,
+          "start_s": 0.865563,
+          "end_s": 2.417687,
+          "queue_s": 0.0002,
+          "response": {
+            "ok": true,
+            "request_s": 1.552,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 274.945,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.865363,
+          "start_s": 2.418023,
+          "end_s": 4.428682,
+          "queue_s": 1.55266,
+          "response": {
+            "ok": true,
+            "request_s": 2.011,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 563.671,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 3.865363,
+          "start_s": 3.865517,
+          "end_s": 4.671002,
+          "queue_s": 0.000154,
+          "response": {
+            "ok": true,
+            "request_s": 0.805,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 29.084,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 4.671002,
+      "phase_makespan_s": 3.805639,
+      "throughput_completed_tasks_s": 0.64226,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 4.671002,
+      "a2_request_s": 0.805,
+      "a2_queue_s": 0.000154,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 29.084,
+      "b_completion_from_arrival_s": 1.552324,
+      "b_queue_s": 0.0002,
+      "c_completion_from_arrival_s": 3.563319,
+      "c_queue_s": 1.55266
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:05:37.779536+00:00",
+      "mix": "short_long",
+      "policy": "preserve",
+      "wait_s": 8.0,
+      "repeat": 3,
+      "arm_description": "preserve: A uses slot0, B->C use slot1, A2 at tool-ready time",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.866777,
+      "a2_eligible_s": 8.866777,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 4e-06,
+          "end_s": 0.866777,
+          "queue_s": 4e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.867,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 257.485,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 1,
+          "arrival_s": 0.866777,
+          "start_s": 0.867024,
+          "end_s": 2.415911,
+          "queue_s": 0.000247,
+          "response": {
+            "ok": true,
+            "request_s": 1.549,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 265.58,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.866777,
+          "start_s": 2.416054,
+          "end_s": 4.295678,
+          "queue_s": 1.549277,
+          "response": {
+            "ok": true,
+            "request_s": 1.88,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 567.363,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.866777,
+          "start_s": 8.866931,
+          "end_s": 9.574463,
+          "queue_s": 0.000154,
+          "response": {
+            "ok": true,
+            "request_s": 0.708,
+            "cache_n": 1216,
+            "prompt_n": 54,
+            "prompt_ms": 30.212,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.574463,
+      "phase_makespan_s": 8.707686,
+      "throughput_completed_tasks_s": 0.313333,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.574463,
+      "a2_request_s": 0.708,
+      "a2_queue_s": 0.000154,
+      "a2_cache_n": 1216,
+      "a2_prompt_n": 54,
+      "a2_prompt_ms": 30.212,
+      "b_completion_from_arrival_s": 1.549134,
+      "b_queue_s": 0.000247,
+      "c_completion_from_arrival_s": 3.428901,
+      "c_queue_s": 1.549277
+    },
+    {
+      "experiment": "E4",
+      "timestamp_utc": "2026-11-04T11:05:47.590896+00:00",
+      "mix": "short_long",
+      "policy": "reuse",
+      "wait_s": 8.0,
+      "repeat": 3,
+      "arm_description": "reuse: B uses slot0, C uses slot1; A2 uses slot0 after B and tool-ready",
+      "a2_prompt_sha256": "03e0b45fdc0dc070900c7ce3baae68b860d20362cc22682fb1de5dc3df361c8e",
+      "a1_end_s": 0.875695,
+      "a2_eligible_s": 8.875695,
+      "all_ok": true,
+      "completed": 3,
+      "worker_errors": [],
+      "erase_responses": [
+        {
+          "id_slot": 0,
+          "n_erased": 1333
+        },
+        {
+          "id_slot": 1,
+          "n_erased": 2719
+        }
+      ],
+      "timings": {
+        "A1": {
+          "name": "A1",
+          "slot": 0,
+          "arrival_s": 0.0,
+          "start_s": 1e-06,
+          "end_s": 0.875695,
+          "queue_s": 1e-06,
+          "response": {
+            "ok": true,
+            "request_s": 0.876,
+            "cache_n": 0,
+            "prompt_n": 1217,
+            "prompt_ms": 260.368,
+            "predicted_n": 64,
+            "cached_field": 1280,
+            "evaluated_field": 1217,
+            "error": null
+          }
+        },
+        "B": {
+          "name": "B",
+          "slot": 0,
+          "arrival_s": 0.875695,
+          "start_s": 0.876015,
+          "end_s": 3.351493,
+          "queue_s": 0.00032,
+          "response": {
+            "ok": true,
+            "request_s": 2.475,
+            "cache_n": 0,
+            "prompt_n": 1206,
+            "prompt_ms": 246.057,
+            "predicted_n": 128,
+            "cached_field": 1333,
+            "evaluated_field": 1206,
+            "error": null
+          }
+        },
+        "C": {
+          "name": "C",
+          "slot": 1,
+          "arrival_s": 0.875695,
+          "start_s": 0.876526,
+          "end_s": 3.379848,
+          "queue_s": 0.000831,
+          "response": {
+            "ok": true,
+            "request_s": 2.503,
+            "cache_n": 0,
+            "prompt_n": 2592,
+            "prompt_ms": 587.425,
+            "predicted_n": 128,
+            "cached_field": 2719,
+            "evaluated_field": 2592,
+            "error": null
+          }
+        },
+        "A2": {
+          "name": "A2",
+          "slot": 0,
+          "arrival_s": 8.875695,
+          "start_s": 8.875885,
+          "end_s": 9.808725,
+          "queue_s": 0.00019,
+          "response": {
+            "ok": true,
+            "request_s": 0.933,
+            "cache_n": 11,
+            "prompt_n": 1259,
+            "prompt_ms": 286.372,
+            "predicted_n": 64,
+            "cached_field": 1333,
+            "evaluated_field": 1270,
+            "error": null
+          }
+        }
+      },
+      "total_makespan_s": 9.808725,
+      "phase_makespan_s": 8.93303,
+      "throughput_completed_tasks_s": 0.30585,
+      "limitations": "B/C are one-step model tasks; tool wait is simulated sleep. Slot preservation is client-enforced idleness, not KV pinning.",
+      "a_completion_s": 9.808725,
+      "a2_request_s": 0.933,
+      "a2_queue_s": 0.00019,
+      "a2_cache_n": 11,
+      "a2_prompt_n": 1259,
+      "a2_prompt_ms": 286.372,
+      "b_completion_from_arrival_s": 2.475798,
+      "b_queue_s": 0.00032,
+      "c_completion_from_arrival_s": 2.504153,
+      "c_queue_s": 0.000831
+    }
+  ]
+}
