@@ -1,0 +1,5 @@
+# Dependencies for Phase 1 reproduction.
+# Experimental harnesses and their offline unit tests use the Python standard library.
+# The Click coding-agent workload invokes real pytest tests against the pinned
+# upstream Click checkout (installed separately with pip install -e ./coding-repos/click).
+pytest>=8.0,<10.0
